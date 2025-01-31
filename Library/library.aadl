@@ -1,0 +1,111 @@
+--package library_ProVant
+--
+---- This package models the hardware architecture of the Crazyflie
+---- See https://wiki.bitcraze.io/projects:crazyflie2:architecture:index
+---- for details
+--
+--public
+--	with Buses::SPI, Buses::UART, Processors::ARM;
+--
+--	with Processor_Properties, provant_data;
+--
+--	processor nRF51822 extends Processors::ARM::Generic_ARM
+--		features
+--			uart_bus: requires bus access Buses::UART::UART.IMPL;
+--		properties
+--			Scheduling_Protocol => (RMS);
+--			Processor_Properties::PRocessor_Frequency => 168hz;
+--	--  XXX memory components ?
+--	end nRF51822;
+--
+--		-------------
+--		-- Sonar_MB2530 --
+--		-------------
+--	device Sonar_MB2530
+--		features
+--			Sonar_data: out data port provant_data::Six_Axis.impl;
+--			pwm_bus: requires bus access PWM;
+--		flows
+--			f1: flow source Sonar_data {latency => 200us .. 500us;};
+--		properties
+--			Dispatch_Protocol => Periodic;
+--			Period => 50ms;
+--	end Sonar_MB2530;
+--
+--		-- PITOT SENSOR --
+--		------------------
+--	device Pitot_MS4525DO
+--		features
+--			pitot_data: out data port provant_data::Six_Axis.impl;
+--			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+--		flows
+--			f1: flow source pitot_data {latency => 200us .. 500us;};
+--		properties
+--			Dispatch_Protocol => Periodic;
+--			Period => 50ms;
+--	end Pitot_MS4525DO;
+--
+--		------------
+--		-- GPS_UBLOX --
+--		-------------
+--	device GPS_UBLOX
+--		features
+--			GPS_data: out data port provant_data::Six_Axis.impl;
+--			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+--		flows
+--			f1: flow source GPS_data {latency => 200us .. 500us;};
+--		properties
+--			Dispatch_Protocol => Periodic;
+--			Period => 50ms;
+--	end GPS_UBLOX;
+--
+--	device GPS_UBLOX2
+--		features
+--			GPS_data: out data port provant_data::Six_Axis.impl;
+--			usb_bus: requires bus access Buses::SPI::SPI.IMPL;
+--		flows
+--			f1: flow source GPS_data {latency => 200us .. 500us;};
+--		properties
+--			Dispatch_Protocol => Periodic;
+--			Period => 50ms;
+--	end GPS_UBLOX2;
+--
+--		---------------
+--		-- Propeller --
+--		--------------- 
+--	bus PWM
+--	end PWM;
+--
+--	device Propeller
+--		features
+--			rate: in data port provant_data::PWM_Rate;
+--			pwm_bus: requires bus access PWM;
+--			uart_bus: requires bus access Buses::UART::UART.IMPL;
+----  flows
+--				-- f1 : flow sink rate { latency => 100 us .. 100 us; };
+--		properties
+--			Dispatch_Protocol => Sporadic;
+--	end Propeller;
+--
+--	device Propeller2
+--		features
+--			rate: in data port provant_data::PWM_Rate;
+--			pwm_bus: requires bus access PWM;
+--				--uart_bus : requires bus access Buses::UART::UART.IMPL;
+----  flows
+--				-- f1 : flow sink rate { latency => 100 us .. 100 us; };
+--		properties
+--			Dispatch_Protocol => Sporadic;
+--	end Propeller2;
+--
+--	device UART_to_SPI
+--		features
+--			uart_bus: requires bus access Buses::UART::UART.IMPL;
+--			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+--	end UART_to_SPI;
+--
+--	device implementation UART_to_SPI.impl
+--	end UART_to_SPI.impl;
+--
+--
+--end library_ProVant;

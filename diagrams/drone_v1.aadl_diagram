@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="5dfd1f78-23a1-47a9-bec1-c3e0a2fe8110" manual="true">
+    <element uuid="d7e07ce0-828d-482f-8ed5-e13fd3861363" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Battery</seg>
+      </bo>
+      <position x="63.0" y="38.0"/>
+      <size width="99.0" height="35.0"/>
+    </element>
+    <element uuid="7bad7c15-344e-49c6-9da8-7ea1c33c0ed7" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Camera</seg>
+      </bo>
+      <position x="303.0" y="38.0"/>
+      <size width="105.0" height="35.0"/>
+    </element>
+    <element uuid="81a1044f-71ff-4558-8907-e786a5ced957" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>ControlSW</seg>
+      </bo>
+      <position x="410.0" y="140.0"/>
+      <size width="122.0" height="35.0"/>
+    </element>
+    <element uuid="5a8598dc-eaf4-4fa9-87cf-7196228eb972" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Drone</seg>
+      </bo>
+      <position x="205.0" y="258.0"/>
+      <size width="88.0" height="35.0"/>
+    </element>
+    <element uuid="073cdf1e-0565-4869-b512-372d8e2c0759" manual="true">
+      <element uuid="d6da79e0-078a-42f0-8a57-36ac5f632a74" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="-41.00000762939453" y="96.0"/>
+          <point x="-29.00000762939453" y="96.0"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Drone.impl</seg>
+      </bo>
+      <position x="63.0" y="258.0"/>
+      <size width="122.0" height="35.0"/>
+    </element>
+    <element uuid="2daa9214-b201-4865-98d0-953568948d6a" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>DroneProcess</seg>
+      </bo>
+      <position x="70.0" y="350.0"/>
+      <size width="142.0" height="35.0"/>
+    </element>
+    <element uuid="0ca7d254-2bf0-4cbc-8f99-8655c8f7aa87" manual="true">
+      <element uuid="b1e30b62-28fa-42f3-8e9f-015c34f7266e" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="-48.0" y="144.0"/>
+          <point x="-48.0" y="160.0"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>DroneProcess.impl</seg>
+      </bo>
+      <position x="10.0" y="300.0"/>
+      <size width="170.0" height="35.0"/>
+    </element>
+    <element uuid="5c9bde93-a634-4c2b-9671-c12c6f0f2d56" manual="true">
+      <element uuid="bca4cb27-9092-4d82-a74b-f39b05516ec8" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>pwm_bus</seg>
+        </bo>
+        <position y="45.0"/>
+      </element>
+      <element uuid="94f6bd09-205c-408c-a6a2-b21df58a63b0" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>speed</seg>
+        </bo>
+        <position/>
+      </element>
+      <element uuid="71c08b92-c84c-4e45-9408-af214f0dea17" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>speedFlow</seg>
+        </bo>
+        <position x="50.0" y="32.0"/>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>ESC</seg>
+      </bo>
+      <position x="970.0" y="270.0"/>
+      <size width="130.0" height="85.0"/>
+    </element>
+    <element uuid="98f91681-5666-4352-bc3b-cce9a627b012" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>FlightController</seg>
+      </bo>
+      <position x="340.0" y="590.0"/>
+      <size width="190.0" height="30.0"/>
+    </element>
+    <element uuid="7d6b6bab-3868-4173-ba64-7aac750c6982" manual="true">
+      <element uuid="d8c95e08-01ef-4992-a5d6-df59c669996c" manual="true">
+        <element uuid="8670794b-7012-4820-8aed-3b751a963dee" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="66a18115-27f8-4e04-a572-79aed155dcb2" manual="true">
+        <element uuid="1b70f96c-6564-4d7e-87ff-830c24b905aa" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="08a45a6c-af9d-4b29-96b3-0a4366477232" manual="true">
+        <element uuid="67bd9ccb-eee2-4268-928c-1042737f400c" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="7332b6cb-edb9-4cab-9b3e-8c486274383d" manual="true">
+        <element uuid="c998eb0d-95be-4617-91cb-935f584efc03" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="b6e8e542-5b18-4116-9875-dffb1b0f2a4a" manual="true">
+        <element uuid="049d70bc-24e2-43f3-92c2-5194afd432f9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="b065dbe2-2e48-4563-bc63-ab52514e7bd5" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>nextDirection</seg>
+        </bo>
+        <position y="70.0"/>
+      </element>
+      <element uuid="adfcba01-85fd-422d-975d-7f9670806a50" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>speed_1</seg>
+        </bo>
+        <position x="306.8411521911621" y="205.0"/>
+      </element>
+      <element uuid="12a1d234-d30a-4b1f-8e49-7d850e0e31bc" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>speed_2</seg>
+        </bo>
+        <position x="306.8411521911621" y="115.0"/>
+      </element>
+      <element uuid="129a650c-4e81-46d3-9b2d-0a4873e757b5" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>speed_3</seg>
+        </bo>
+        <position x="306.8411521911621" y="160.0"/>
+      </element>
+      <element uuid="4b3d023e-bb87-484d-b5d5-a567807ed5d8" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>speed_4</seg>
+        </bo>
+        <position x="306.8411521911621" y="70.0"/>
+      </element>
+      <element uuid="cece1027-b7c6-4882-86fb-d33b18516baf" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+      </element>
+      <element uuid="71b825d9-d75e-473f-a5c4-de75a96350ff" manual="true">
+        <element uuid="b22e1df7-c5ab-4a60-a75e-3f8d13f0c51e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>nextDirection</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="bd6c6f9b-055b-4bf7-a95e-2ef58960ccb7" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>speed_1</seg>
+          </bo>
+          <position x="183.8411521911621" y="135.0"/>
+        </element>
+        <element uuid="34220171-437a-4c08-bd67-9a1c9982b9a8" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>speed_2</seg>
+          </bo>
+          <position x="183.8411521911621" y="45.0"/>
+        </element>
+        <element uuid="2d0a27fd-2c36-4816-9488-f74fc9fa345c" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>speed_3</seg>
+          </bo>
+          <position x="183.8411521911621" y="90.0"/>
+        </element>
+        <element uuid="44abb152-243f-4dfd-8e33-63cfdfcfd236" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>speed_4</seg>
+          </bo>
+          <position x="183.8411521911621"/>
+        </element>
+        <element uuid="45cb5db5-4773-48d9-871f-ebab5c032606" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>usedir_1</seg>
+          </bo>
+        </element>
+        <element uuid="c9aa0c2a-5fc9-4bab-95c5-6a14b3d0299e" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>usedir_2</seg>
+          </bo>
+        </element>
+        <element uuid="e60b906b-fc05-44c9-a14d-6d06b326c5df" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>usedir_3</seg>
+          </bo>
+        </element>
+        <element uuid="7127f080-b46b-45a0-82e8-8bd0798b7bed" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>usedir_4</seg>
+          </bo>
+        </element>
+        <element uuid="dd6d605d-e605-49f9-9e6e-21a80da505b5" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>sc_type</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>fc</seg>
+        </bo>
+        <position x="50.0" y="110.0"/>
+        <size width="247.0" height="175.0"/>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>FlightController.impl</seg>
+      </bo>
+      <position x="540.0" y="240.0"/>
+      <size width="370.0" height="320.0"/>
+    </element>
+    <element uuid="7279ac6c-42e0-47c9-9799-7a9558aaa2ea" manual="true">
+      <element uuid="36d5c579-a5c3-4376-897c-e840a6e34a4d" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>nextDirection</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>FlightController_th</seg>
+      </bo>
+      <position x="50.0" y="400.0"/>
+      <size width="180.0" height="215.0"/>
+    </element>
+    <element uuid="1172ec91-d2c5-4dba-9f74-efb2f84612f6" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>ImageProcessing</seg>
+      </bo>
+      <position x="63.0" y="148.0"/>
+      <size width="160.0" height="35.0"/>
+    </element>
+    <element uuid="7a3da3db-8f4f-4b2c-b96d-8e7a0ca97e69" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Publish</seg>
+      </bo>
+      <position x="183.0" y="38.0"/>
+      <size width="101.0" height="35.0"/>
+    </element>
+    <element uuid="56de26cb-aead-4183-b587-d01ef01a604f" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>ROS</seg>
+      </bo>
+      <position x="197.0" y="203.0"/>
+      <size width="86.0" height="35.0"/>
+    </element>
+    <element uuid="51113017-4ba0-4b75-b6ef-807605d9d54b" manual="true">
+      <element uuid="5aad7c42-f1b6-454b-88dd-dd80a024ffab" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="-49.0" y="41.0"/>
+          <point x="-37.0" y="41.0"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>ROS.impl</seg>
+      </bo>
+      <position x="63.0" y="203.0"/>
+      <size width="114.0" height="35.0"/>
+    </element>
+    <element uuid="3599bdde-3bc0-4dcc-b94a-ff9f8c7854de" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Temperature</seg>
+      </bo>
+      <position x="205.0" y="93.0"/>
+      <size width="134.0" height="35.0"/>
+    </element>
+    <bo>
+      <seg>package</seg>
+      <seg>drone</seg>
+    </bo>
+    <position x="-230.0" y="-180.0"/>
+    <size width="1110.0" height="670.0"/>
+  </element>
+  <config type="package" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>package</seg>
+      <seg>drone</seg>
+    </context>
+  </config>
+</diagram:Diagram>

@@ -1,0 +1,507 @@
+package Boards::NucleoH7
+
+  --  This package models the hardware of the AHRS case study.
+  --  In this case study, we use a 32F411EDISCOVERY kit,
+
+public
+	with Buses::I2C;
+
+	with Buses::SPI;
+
+	with Data_Sheet;
+
+	with Deployment;
+
+	with Processors::ARM;
+
+	with Types;
+
+	with Buses::UART;
+
+	with provant_data;
+
+	------------
+	-- System --
+	------------
+--	
+--	feature group DOF9
+--		features
+--		acc_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--		acc_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--		acc_data_z: out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_z: out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_z: out data port Types::FLOAT32_TYPE_AADL;
+--	end DOF9;
+--	
+--	feature group DOF9_inv
+--		inverse of DOF9
+--	end DOF9_inv;
+	
+			
+	
+	processor SBC_32F411EDISCOVERY
+		features
+			
+--			DOF9_in: feature group DOF9_inv;
+			acc_data: in data port provant_data::Tree_Axis_Acc.impl;
+----			acc_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+----			acc_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+----			acc_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			mag_data: in data port provant_data::Tree_Axis_Mag.impl;
+----			mag_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+----			mag_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+----			mag_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			gyro_data: in data port provant_data::Tree_Axis_Gyro.impl;
+----			gyro_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			roll_data:  in  data port provant_data::Tree_Axis_Acc.impl;
+			pitch_data:  in  data port provant_data::Tree_Axis_Mag.impl;
+			yaw_data:  in  data port provant_data::Tree_Axis_Gyro.impl;
+			
+			
+			--i2c1: requires bus access Buses::I2C::I2C.IMPL;
+			--i2c2: requires bus access Buses::I2C::I2C.IMPL;
+			i2c3: requires bus access Buses::I2C::I2C.IMPL;
+			i2c4: requires bus access Buses::I2C::I2C.IMPL;
+			spi1: requires bus access Buses::SPI::SPI.IMPL;
+			spi2: requires bus access Buses::SPI::SPI.IMPL;
+			--spi3: requires bus access Buses::SPI::SPI.IMPL;
+			--spi4: requires bus access Buses::SPI::SPI.IMPL;
+			--spi5: requires bus access Buses::SPI::SPI.IMPL;
+			--spi6: requires bus access Buses::SPI::SPI.IMPL;
+			--usart1_bus: requires bus access Buses::UART::UART.IMPL;
+			usart2_bus: requires bus access Buses::UART::UART.IMPL;
+			usart3_bus: requires bus access Buses::UART::UART.IMPL;
+			--usart6_bus: requires bus access Buses::UART::UART.IMPL;
+			uart4_bus: requires bus access Buses::UART::UART.IMPL;
+			uart5_bus: requires bus access Buses::UART::UART.IMPL;
+			uart7_bus: requires bus access Buses::UART::UART.IMPL;
+			uart8_bus: requires bus access Buses::UART::UART.IMPL;
+			
+--			 pwm_bus1  : requires bus access PWM;
+--			  pwm_bus2  : requires bus access PWM;
+--			   pwm_bus3  : requires bus access PWM;
+--			    pwm_bus4  : requires bus access PWM;
+--			     pwm_bus5  : requires bus access PWM;
+--			      pwm_bus6  : requires bus access PWM;
+--			       pwm_bus7  : requires bus access PWM; 
+--			       pwm_bus_8 : requires bus access PWM;
+			       
+			          
+			rate_PWM1: out data port provant_data::PWM_Rate;
+			rate_PWM2: out data port provant_data::PWM_Rate;
+			rate_PWM3: out data port provant_data::PWM_Rate;
+			rate_PWM4: out data port provant_data::PWM_Rate;
+			rate_PWM5: out data port provant_data::PWM_Rate;
+			rate_PWM6: out data port provant_data::PWM_Rate;
+			rate_PWM7: out data port provant_data::PWM_Rate;
+			rate_PWM8: out data port provant_data::PWM_Rate;
+			
+			
+			reset_pin: in event port;
+			
+		properties
+				--indata : refined to in data port;
+			Data_Sheet::UUID => "http://www.st.com/en/evaluation-tools/32f411ediscovery.html";
+	end SBC_32F411EDISCOVERY;
+
+		-- Bare version: only hardware elements are presented
+		--  AHRS variant: a generic software block is present, but *not* connected
+		--  to devices. This variant is necessary for code generation.
+--	system implementation SBC_32F411EDISCOVERY.RTOS
+--		subcomponents
+--			Software: process Attitude.impl;
+--			CPU: processor CortexH7.IMPL;
+--		properties
+--			Actual_Processor_Binding => (reference (CPU)) applies to Software;
+--	end SBC_32F411EDISCOVERY.RTOS;
+
+--	system implementation SBC_32F411EDISCOVERY.impl extends SBC_32F411EDISCOVERY.RTOS
+--		subcomponents
+--			RAM: memory Flash.IMPL;
+--			i2c_bus: bus Buses::I2C::I2C.IMPL;
+--			spi_bus: bus Buses::SPI::SPI.IMPL;
+--		connections
+--			I2C_SYS3: bus access i2c3 <-> CPU.i2c3_bus;
+--			I2C_SYS4: bus access i2c4 <-> CPU.i2c4_bus;
+--			-- SPI BUS --
+--			SPI_SYS1: bus access spi1 <-> CPU.spi1_bus;
+--			SPI_SYS2: bus access spi2 <-> CPU.spi2_bus;
+			-- UART BUS --
+--			UART_SYS4: bus access uart4_bus <-> CPU.uart4_bus;
+--			UART_SYS5: bus access uart5_bus <-> CPU.uart5_bus;
+--			UART_SYS7: bus access uart7_bus <-> CPU.uart7_bus;
+--			UART_SYS8: bus access uart8_bus <-> CPU.uart8_bus;
+			-- USART --
+--			USART_SYS2: bus access usart2_bus <-> CPU.usart2_bus;
+--			USART_SYS3: bus access usart3_bus <-> CPU.usart3_bus;
+--	end SBC_32F411EDISCOVERY.impl;
+
+bus PWM
+  end PWM;
+  
+		---------------
+		-- Processor --
+		---------------
+	processor CortexH7 extends Processors::ARM::Generic_ARM
+		features
+			i2c1_bus: requires bus access Buses::I2C::I2C.IMPL;
+			i2c2_bus: requires bus access Buses::I2C::I2C.IMPL;
+			i2c3_bus: requires bus access Buses::I2C::I2C.IMPL;
+			i2c4_bus: requires bus access Buses::I2C::I2C.IMPL;
+			spi1_bus: requires bus access Buses::SPI::SPI.IMPL;
+			spi2_bus: requires bus access Buses::SPI::SPI.IMPL;
+			spi3_bus: requires bus access Buses::SPI::SPI.IMPL;
+			spi4_bus: requires bus access Buses::SPI::SPI.IMPL;
+			spi5_bus: requires bus access Buses::SPI::SPI.IMPL;
+			spi6_bus: requires bus access Buses::SPI::SPI.IMPL;
+			--uart_bus: requires bus access Buses::UART::UART.IMPL;
+			usart1_bus: requires bus access Buses::UART::UART.IMPL;
+			usart2_bus: requires bus access Buses::UART::UART.IMPL;
+			usart3_bus: requires bus access Buses::UART::UART.IMPL;
+			usart6_bus: requires bus access Buses::UART::UART.IMPL;
+			uart4_bus: requires bus access Buses::UART::UART.IMPL;
+			uart5_bus: requires bus access Buses::UART::UART.IMPL;
+			uart7_bus: requires bus access Buses::UART::UART.IMPL;
+			uart8_bus: requires bus access Buses::UART::UART.IMPL;
+		properties
+			Deployment::Execution_Platform => FreeRTOS;
+	end CortexH7;
+
+	processor implementation CortexH7.IMPL
+		properties
+			Scheduling_Protocol => (Posix_1003_Highest_Priority_First_Protocol);
+			Priority_Range => 0 .. 255;
+	end CortexH7.IMPL;
+
+		-------------
+		-- Memory ---
+		-------------
+	memory Flash
+	end Flash;
+
+	memory implementation Flash.IMPL
+	end Flash.IMPL;
+
+		-------------
+		-- Threads --
+		-------------
+	thread ACCELERO
+		features
+				--  Connections from the accelerometer device
+			acc_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+					-- acc_in_data_x_SYSTEM : in data port Types::FLOAT32_TYPE_AADL;
+					--  Connections to the other software elements
+			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		flows
+			f1: flow sink acc_in_data_x {latency => 10ms .. 20ms;};
+				-- XXX: consolidate to all ports
+		properties
+			Priority => 5;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end ACCELERO;
+
+	subprogram ACCELERO_SUB_wrapper
+		features
+			acc_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			acc_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			acc_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end ACCELERO_SUB_wrapper;
+
+	subprogram implementation ACCELERO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram ACCELERO_SUB;
+			};
+		connections
+			P1: parameter Spg.acc_out_data_x -> acc_out_data_x;
+			P2: parameter Spg.acc_out_data_y -> acc_out_data_y;
+			P3: parameter Spg.acc_out_data_z -> acc_out_data_z;
+	end ACCELERO_SUB_wrapper.i;
+
+	thread implementation ACCELERO.IMPL
+		calls
+			ACCELERO_CALL: {
+				accelero_sub: subprogram ACCELERO_SUB_wrapper.i;
+			};
+		connections
+			ACC_PC1: parameter accelero_sub.acc_out_data_x -> acc_out_data_x;
+			ACC_PC2: parameter accelero_sub.acc_out_data_y -> acc_out_data_y;
+			ACC_PC3: parameter accelero_sub.acc_out_data_z -> acc_out_data_z;
+	end ACCELERO.IMPL;
+
+	thread MAGNETO
+		features
+				--  Connections from the magnetometer device
+			mag_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+					--  Connections to the other software elements
+			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 4;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end MAGNETO;
+
+	subprogram MAGNETO_SUB_wrapper
+		features
+			mag_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			mag_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			mag_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end MAGNETO_SUB_wrapper;
+
+	subprogram implementation MAGNETO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram MAGNETO_SUB;
+			};
+		connections
+			P1: parameter Spg.mag_out_data_x -> mag_out_data_x;
+			P2: parameter Spg.mag_out_data_y -> mag_out_data_y;
+			P3: parameter Spg.mag_out_data_z -> mag_out_data_z;
+	end MAGNETO_SUB_wrapper.i;
+
+	thread implementation MAGNETO.IMPL
+		calls
+			MAGNETO_CALL: {
+				magneto_sub: subprogram MAGNETO_SUB_wrapper.i;
+			};
+		connections
+			MAG_PC1: parameter magneto_sub.mag_out_data_x -> mag_out_data_x;
+			MAG_PC2: parameter magneto_sub.mag_out_data_y -> mag_out_data_y;
+			MAG_PC3: parameter magneto_sub.mag_out_data_z -> mag_out_data_z;
+	end MAGNETO.IMPL;
+
+	thread GYRO
+		features
+				--  Connections from the gyrometer device
+			gyro_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+					--  Connections to the other software elements
+			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 3;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end GYRO;
+
+	subprogram GYRO_SUB_wrapper
+		features
+			gyro_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end GYRO_SUB_wrapper;
+
+	subprogram implementation GYRO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram GYRO_SUB;
+			};
+		connections
+			P1: parameter Spg.gyro_out_data_x -> gyro_out_data_x;
+			P2: parameter Spg.gyro_out_data_y -> gyro_out_data_y;
+			P3: parameter Spg.gyro_out_data_z -> gyro_out_data_z;
+	end GYRO_SUB_wrapper.i;
+
+	thread implementation GYRO.IMPL
+		calls
+			GYRO_CALL: {
+				gyro_sub: subprogram GYRO_SUB_wrapper.i;
+			};
+		connections
+			GYRO_PC1: parameter gyro_sub.gyro_out_data_x -> gyro_out_data_x;
+			GYRO_PC2: parameter gyro_sub.gyro_out_data_y -> gyro_out_data_y;
+			GYRO_PC3: parameter gyro_sub.gyro_out_data_z -> gyro_out_data_z;
+	end GYRO.IMPL;
+
+	thread ATTITUDE_CALCULATION
+		features
+			acc_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 1;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 65ms;
+			Stack_Size => 4096 Bytes;
+	end ATTITUDE_CALCULATION;
+
+	thread implementation ATTITUDE_CALCULATION.IMPL
+		calls
+			ATTITUDE_CALL: {
+				attitude_sub: subprogram ATTITUDE_SUB;
+			};
+		connections
+			ACC_PC1: parameter acc_in_data_x -> attitude_sub.acc_in_data_x;
+			ACC_PC2: parameter acc_in_data_y -> attitude_sub.acc_in_data_y;
+			ACC_PC3: parameter acc_in_data_z -> attitude_sub.acc_in_data_z;
+			MAG_PC1: parameter mag_in_data_x -> attitude_sub.mag_in_data_x;
+			MAG_PC2: parameter mag_in_data_y -> attitude_sub.mag_in_data_y;
+			MAG_PC3: parameter mag_in_data_z -> attitude_sub.mag_in_data_z;
+			GYRO_PC1: parameter gyro_in_data_x -> attitude_sub.gyro_in_data_x;
+			GYRO_PC2: parameter gyro_in_data_y -> attitude_sub.gyro_in_data_y;
+			GYRO_PC3: parameter gyro_in_data_z -> attitude_sub.gyro_in_data_z;
+	end ATTITUDE_CALCULATION.IMPL;
+
+		---------------
+		-- Processes --
+		---------------
+	process AHRS_Process
+		features
+			acc_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+			mag_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+					--acc_in_data_x_SYSTEM : in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+		flows
+			f1: flow sink acc_in_data_x {latency => 10ms .. 20ms;}; -- XXX: consolidate to all ports
+	end AHRS_Process;
+
+	process ATTITUDE extends AHRS_Process
+	end ATTITUDE;
+
+	process implementation ATTITUDE.IMPL
+		subcomponents
+			accelero_thread: thread ACCELERO.IMPL;
+			magneto_thread: thread MAGNETO.IMPL;
+			gyro_thread: thread GYRO.IMPL;
+			attitude_calculation_thread: thread ATTITUDE_CALCULATION.IMPL;
+		connections
+			ACC_INPUT_PC1: port acc_in_data_x -> accelero_thread.acc_in_data_x;
+			ACC_INPUT_PC2: port acc_in_data_y -> accelero_thread.acc_in_data_y;
+			ACC_INPUT_PC3: port acc_in_data_z -> accelero_thread.acc_in_data_z;
+			MAG_INPUT_PC1: port mag_in_data_x -> magneto_thread.mag_in_data_x;
+			MAG_INPUT_PC2: port mag_in_data_y -> magneto_thread.mag_in_data_y;
+			MAG_INPUT_PC3: port mag_in_data_z -> magneto_thread.mag_in_data_z;
+			GYRO_INPUT_PC1: port gyro_in_data_x -> gyro_thread.gyro_in_data_x;
+			GYRO_INPUT_PC2: port gyro_in_data_y -> gyro_thread.gyro_in_data_y;
+			GYRO_INPUT_PC3: port gyro_in_data_z -> gyro_thread.gyro_in_data_z;
+			ACC_INPUT_PC1r: port acc_in_data_x2 -> accelero_thread.acc_in_data_x;
+			ACC_INPUT_PC2r: port acc_in_data_y2 -> accelero_thread.acc_in_data_y;
+			ACC_INPUT_PC3r: port acc_in_data_z2 -> accelero_thread.acc_in_data_z;
+			MAG_INPUT_PC1r: port mag_in_data_x2 -> magneto_thread.mag_in_data_x;
+			MAG_INPUT_PC2r: port mag_in_data_y2 -> magneto_thread.mag_in_data_y;
+			MAG_INPUT_PC3r: port mag_in_data_z2 -> magneto_thread.mag_in_data_z;
+			GYRO_INPUT_PC1r: port gyro_in_data_x2 -> gyro_thread.gyro_in_data_x;
+			GYRO_INPUT_PC2r: port gyro_in_data_y2 -> gyro_thread.gyro_in_data_y;
+			GYRO_INPUT_PC3r: port gyro_in_data_z2 -> gyro_thread.gyro_in_data_z;
+			ACC_SUBMIT_PC1: port accelero_thread.acc_out_data_x -> attitude_calculation_thread.acc_in_data_x;
+			ACC_SUBMIT_PC2: port accelero_thread.acc_out_data_y -> attitude_calculation_thread.acc_in_data_y;
+			ACC_SUBMIT_PC3: port accelero_thread.acc_out_data_z -> attitude_calculation_thread.acc_in_data_z;
+			MAG_SUBMIT_PC1: port magneto_thread.mag_out_data_x -> attitude_calculation_thread.mag_in_data_x;
+			MAG_SUBMIT_PC2: port magneto_thread.mag_out_data_y -> attitude_calculation_thread.mag_in_data_y;
+			MAG_SUBMIT_PC3: port magneto_thread.mag_out_data_z -> attitude_calculation_thread.mag_in_data_z;
+			GYRO_SUBMIT_PC1: port gyro_thread.gyro_out_data_x -> attitude_calculation_thread.gyro_in_data_x;
+			GYRO_SUBMIT_PC2: port gyro_thread.gyro_out_data_y -> attitude_calculation_thread.gyro_in_data_y;
+			GYRO_SUBMIT_PC3: port gyro_thread.gyro_out_data_z -> attitude_calculation_thread.gyro_in_data_z;
+				-- ACC_INPUT_PC4   : port  acc_in_data_x_SYSTEM ->  accelero_thread.acc_in_data_x_SYSTEM;
+		flows
+			f1: flow sink acc_in_data_x -> ACC_INPUT_PC1 -> accelero_thread.f1;
+	end ATTITUDE.IMPL;
+
+-----------------
+-- SUBPROGRAMS --
+-----------------
+	subprogram ACCELERO_SUB
+		features
+			acc_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			acc_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			acc_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			Source_Language => (CPP);
+			Source_Name => "entryaccelero";
+			Source_Text => ("threads.cpp");
+	end ACCELERO_SUB;
+
+	subprogram MAGNETO_SUB
+		features
+			mag_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			mag_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			mag_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			Source_Language => (CPP);
+			Source_Name => "entrymagneto";
+			Source_Text => ("threads.cpp");
+	end MAGNETO_SUB;
+
+	subprogram GYRO_SUB
+		features
+			gyro_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+			gyro_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			Source_Language => (CPP);
+			Source_Name => "entrygyro";
+			Source_Text => ("threads.cpp");
+	end GYRO_SUB;
+
+	subprogram ATTITUDE_SUB
+		features
+			acc_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+			mag_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+			acc_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+			mag_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+			acc_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+			mag_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+			gyro_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			Source_Language => (CPP);
+			Source_Name => "entryattitude";
+			Source_Text => ("threads.cpp");
+	end ATTITUDE_SUB;
+
+end Boards::NucleoH7;

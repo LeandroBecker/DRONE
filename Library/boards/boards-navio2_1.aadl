@@ -1,0 +1,598 @@
+package AHRS::Hardware::NAVIO2_1
+
+  --  This package models the hardware of the AHRS case study.
+  --  In this case study, we use a 32F411EDISCOVERY kit,
+
+public
+	with Buses::I2C;
+
+	with Buses::SPI;
+
+	with Data_Sheet;
+
+	with Deployment;
+
+	with Processors::ARM;
+
+	with Types;
+
+	with provant_data;
+
+	------------
+	-- System --
+	------------
+	
+--	feature group DOF9
+--		features
+--		acc_data_x:  out data port Types::FLOAT32_TYPE_AADL;
+--		acc_data_y:  out data port Types::FLOAT32_TYPE_AADL;
+--		acc_data_z:  out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_x:  out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_y:  out data port Types::FLOAT32_TYPE_AADL;
+--		mag_data_z:  out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_x:  out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_y:  out data port Types::FLOAT32_TYPE_AADL;
+--		gyro_data_z:  out data port Types::FLOAT32_TYPE_AADL;
+--	end DOF9;
+--	
+--	feature group DOF9_inv
+--		inverse of DOF9
+--	end DOF9_inv;
+	
+	system SBC_32F411EDISCOVERY
+		features
+			--DOF9_out: feature group DOF9;
+			--DOF9: out event data port provant_data::Nine_Axis.impl;
+			acc_data: out event data port provant_data::Tree_Axis_Acc.impl;
+----			acc_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+----			acc_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			mag_data: out event data port provant_data::Tree_Axis_Mag.impl;
+----			mag_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+----			mag_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			gyro_data: out event data port provant_data::Tree_Axis_Gyro.impl;
+----			gyro_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+----			gyro_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			roll_data  : out event data port provant_data::Tree_Axis_Acc.impl;
+    		pitch_data : out event data port provant_data::Tree_Axis_Mag.impl;
+    		yaw_data   : out event data port  provant_data::Tree_Axis_Gyro.impl;
+			i2c: requires bus access Buses::I2C::I2C.IMPL;
+			spi: requires bus access Buses::SPI::SPI.IMPL;
+		properties
+				--indata : refined to in data port;
+			Data_Sheet::UUID => "http://www.st.com/en/evaluation-tools/32f411ediscovery.html";
+	end SBC_32F411EDISCOVERY;
+
+		-- Bare version: only hardware elements are presented
+		--  AHRS variant: a generic software block is present, but *not* connected
+		--  to devices. This variant is necessary for code generation.
+	system implementation SBC_32F411EDISCOVERY.RTOS
+		subcomponents
+			Software: process Attitude.impl;
+			CPU: processor CortexM3.IMPL;
+		properties
+			Actual_Processor_Binding => (reference (CPU)) applies to Software;
+	end SBC_32F411EDISCOVERY.RTOS;
+
+	system implementation SBC_32F411EDISCOVERY.impl extends SBC_32F411EDISCOVERY.RTOS
+		subcomponents
+			RAM: memory Flash.IMPL;
+			LSM9DS1: device LSM9DS1;
+			MPU9250: device MPU9250;
+			i2c_bus: bus Buses::I2C::I2C.IMPL;
+			spi_bus: bus Buses::SPI::SPI.IMPL;
+		connections
+			I2C_ACC_MAG_BA: bus access i2c_bus <-> LSM9DS1.i2c_bus;
+			I2C_ARM_BA: bus access i2c_bus <-> CPU.i2c_bus;
+			SPI_GYRO_BA: bus access spi_bus <-> MPU9250.spi_bus;
+			SPI_ARM_BA: bus access spi_bus <-> CPU.spi_bus;
+			I2C_SYS: bus access i2c <-> CPU.i2c_bus;
+			SPI_SYS: bus access spi <-> CPU.spi_bus;
+	end SBC_32F411EDISCOVERY.impl;
+
+	system implementation SBC_32F411EDISCOVERY.v2 extends SBC_32F411EDISCOVERY.impl
+		connections
+			ACC_PC1: port LSM9DS1.acc_out_data -> Software.acc_in_data;
+--			ACC_PC2: port LSM9DS1.acc_out_data_y -> Software.acc_in_data_y;
+--			ACC_PC3: port LSM9DS1.acc_out_data_z -> Software.acc_in_data_z;
+			MAG_PC1: port LSM9DS1.mag_out_data -> Software.mag_in_data;
+--			MAG_PC2: port LSM9DS1.mag_out_data_y -> Software.mag_in_data_y;
+--			MAG_PC3: port LSM9DS1.mag_out_data_z -> Software.mag_in_data_z;
+			GYRO_PC1: port LSM9DS1.gyro_out_data -> Software.gyro_in_data;
+--			GYRO_PC2: port LSM9DS1.gyro_out_data_y -> Software.gyro_in_data_y;
+--			GYRO_PC3: port LSM9DS1.gyro_out_data_z -> Software.gyro_in_data_z;
+			ACC_PC1R: port MPU9250.acc_out_data -> Software.acc_in_data2;
+--			ACC_PC2R: port MPU9250.acc_out_data_y -> Software.acc_in_data_y2;
+--			ACC_PC3R: port MPU9250.acc_out_data_z -> Software.acc_in_data_z2;
+			MAG_PC1R: port MPU9250.mag_out_data -> Software.mag_in_data2;
+--			MAG_PC2R: port MPU9250.mag_out_data_y -> Software.mag_in_data_y2;
+--			MAG_PC3R: port MPU9250.mag_out_data_z -> Software.mag_in_data_z2;
+			GYRO_PC1R: port MPU9250.gyro_out_data -> Software.gyro_in_data2;
+--			GYRO_PC2R: port MPU9250.gyro_out_data_y -> Software.gyro_in_data_y2;
+--			GYRO_PC3R: port MPU9250.gyro_out_data_z -> Software.gyro_in_data_z2;
+			POS_ROLL_data_PC1: port Software.roll_out_data -> roll_data;
+			POS_PITCH_data_PC1: port Software.pitch_out_data -> pitch_data;
+			POS_YAW_data_PC1: port Software.yaw_out_data -> yaw_data;
+			POS_ACC_data_PC1: port Software.acc_outf_data -> acc_data;
+			--POS_ACC_data_PC2: port Software.acc_out_data_y -> acc_data_y;
+			--POS_ACC_data_PC3: port Software.acc_out_data_z -> acc_data_z;
+			POS_GYRO_data_PC1: port Software.gyro_outf_data -> gyro_data;
+			--POS_GYRO_data_PC2: port Software.gyro_out_data_y -> gyro_data_y;
+			--POS_GYRO_data_PC3: port Software.gyro_out_data_z -> gyro_data_z;
+			POS_MAG_data_PC1: port Software.mag_outf_data -> mag_data;
+			--POS_MAG_data_PC2: port Software.mag_out_data_y -> mag_data_y;
+			--POS_MAG_data_PC3: port Software.mag_out_data_z -> mag_data_z;
+--		flows
+--			etef1: end to end flow LSM9DS1.f1 -> ACC_PC1 -> Software.f1 {latency => 40ms .. 90ms;};
+		properties
+			Actual_Connection_Binding => (reference (i2c_bus)) applies to ACC_PC1;
+			--Actual_Connection_Binding => (reference (i2c_bus)) applies to ACC_PC2;
+			--Actual_Connection_Binding => (reference (i2c_bus)) applies to ACC_PC3;
+			Actual_Connection_Binding => (reference (i2c_bus)) applies to MAG_PC1;
+			--Actual_Connection_Binding => (reference (i2c_bus)) applies to MAG_PC2;
+			--Actual_Connection_Binding => (reference (i2c_bus)) applies to MAG_PC3;
+			Actual_Connection_Binding => (reference (spi_bus)) applies to GYRO_PC1;
+			--Actual_Connection_Binding => (reference (spi_bus)) applies to GYRO_PC2;
+			--Actual_Connection_Binding => (reference (spi_bus)) applies to GYRO_PC3;
+	end SBC_32F411EDISCOVERY.v2;
+
+		-------------
+		-- Devices --
+		-------------
+	device LSM9DS1
+		--  This device combines a 3D accelerometer and a 3D magnetometer
+		features
+			acc_out_data: out event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_out_data: out event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_out_data: out event data port provant_data::Tree_Axis_Mag.impl;
+--			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			i2c_bus: requires bus access Buses::I2C::I2C.impl;
+--		flows
+--			f1: flow source acc_out_data_x {latency => 10ms .. 20ms;}; -- XXX: consolidate to all ports
+		properties
+			Data_Sheet::UUID => "http://www.st.com/en/mems-and-sensors/lsm303dlhc.html";
+	end LSM9DS1;
+
+	device MPU9250
+		--  This device is a 3D gyroscope
+		features
+			acc_out_data: out event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_out_data: out event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_out_data: out event data port provant_data::Tree_Axis_Mag.impl;
+			--DOF9: out event data port provant_data::Nine_Axis.impl;
+--			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+			spi_bus: requires bus access Buses::SPI::SPI.impl; --  XXX
+		properties
+			Data_Sheet::UUID => "http://www.st.com/en/mems-and-sensors/lsm303dlhc.html";
+	end MPU9250;
+
+		---------------
+		-- Processor --
+		---------------
+	processor CortexM3 extends Processors::ARM::Generic_ARM
+		features
+			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
+			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+		properties
+			Deployment::Execution_Platform => FreeRTOS;
+	end CortexM3;
+
+	processor implementation CortexM3.IMPL
+		properties
+			Scheduling_Protocol => (Posix_1003_Highest_Priority_First_Protocol);
+			Priority_Range => 0 .. 255;
+	end CortexM3.IMPL;
+
+		-------------
+		-- Memory ---
+		-------------
+	memory Flash
+	end Flash;
+
+	memory implementation Flash.IMPL
+	end Flash.IMPL;
+
+		-------------
+		-- Threads --
+		-------------
+	thread ACCELERO
+		features
+				--  Connections from the accelerometer device
+			acc_in_data: in data port provant_data::Tree_Axis_Acc.impl;
+--			acc_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+			-- acc_in_data_x_SYSTEM : in data port Types::FLOAT32_TYPE_AADL;
+			--  Connections to the other software elements
+			acc_out_data: out data port provant_data::Tree_Axis_Acc.impl;
+--			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--		flows
+--			f1: flow sink acc_in_data_x {latency => 10ms .. 20ms;};
+--				-- XXX: consolidate to all ports
+		properties
+			Priority => 5;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end ACCELERO;
+
+	subprogram ACCELERO_SUB_wrapper
+		features
+			acc_out_data: out parameter provant_data::Tree_Axis_Acc.impl;
+--			acc_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end ACCELERO_SUB_wrapper;
+
+	subprogram implementation ACCELERO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram ACCELERO_SUB;
+			};
+		connections
+			P1: parameter Spg.acc_out_data -> acc_out_data;
+--			P2: parameter Spg.acc_out_data_y -> acc_out_data_y;
+--			P3: parameter Spg.acc_out_data_z -> acc_out_data_z;
+	end ACCELERO_SUB_wrapper.i;
+
+	thread implementation ACCELERO.IMPL
+		calls
+			ACCELERO_CALL: {
+				accelero_sub: subprogram ACCELERO_SUB_wrapper.i;
+			};
+		connections
+			ACC_PC1: parameter accelero_sub.acc_out_data -> acc_out_data;
+--			ACC_PC2: parameter accelero_sub.acc_out_data_y -> acc_out_data_y;
+--			ACC_PC3: parameter accelero_sub.acc_out_data_z -> acc_out_data_z;
+	end ACCELERO.IMPL;
+
+	thread MAGNETO
+		features
+				--  Connections from the magnetometer device
+			mag_in_data: in data port provant_data::Tree_Axis_Mag.impl;
+			mag_out_data: out data port provant_data::Tree_Axis_Mag.impl;
+--			mag_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+--					--  Connections to the other software elements
+--			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 4;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end MAGNETO;
+
+	subprogram MAGNETO_SUB_wrapper
+		features
+			mag_out_data: out parameter provant_data::Tree_Axis_Mag.impl;
+--			mag_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end MAGNETO_SUB_wrapper;
+
+	subprogram implementation MAGNETO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram MAGNETO_SUB;
+			};
+		connections
+			P1: parameter Spg.mag_out_data -> mag_out_data;
+--			P2: parameter Spg.mag_out_data_y -> mag_out_data_y;
+--			P3: parameter Spg.mag_out_data_z -> mag_out_data_z;
+	end MAGNETO_SUB_wrapper.i;
+
+	thread implementation MAGNETO.IMPL
+		calls
+			MAGNETO_CALL: {
+				magneto_sub: subprogram MAGNETO_SUB_wrapper.i;
+			};
+		connections
+			MAG_PC1: parameter magneto_sub.mag_out_data -> mag_out_data;
+--			MAG_PC2: parameter magneto_sub.mag_out_data_y -> mag_out_data_y;
+--			MAG_PC3: parameter magneto_sub.mag_out_data_z -> mag_out_data_z;
+	end MAGNETO.IMPL;
+
+	thread GYRO
+		features
+				--  Connections from the gyrometer device
+			gyro_in_data: in data port provant_data::Tree_Axis_Gyro.impl;
+			gyro_out_data: out data port provant_data::Tree_Axis_Gyro.impl;
+--			gyro_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+--					--  Connections to the other software elements
+--			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 3;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 4ms;
+			Source_Stack_Size => 512 Bytes;
+	end GYRO;
+
+	subprogram GYRO_SUB_wrapper
+		features
+			gyro_out_data: out parameter provant_data::Tree_Axis_Gyro.impl;
+--			gyro_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+	end GYRO_SUB_wrapper;
+
+	subprogram implementation GYRO_SUB_wrapper.i
+		calls
+			Mycalls: {
+				Spg: subprogram GYRO_SUB;
+			};
+		connections
+			P1: parameter Spg.gyro_out_data -> gyro_out_data;
+--			P2: parameter Spg.gyro_out_data_y -> gyro_out_data_y;
+--			P3: parameter Spg.gyro_out_data_z -> gyro_out_data_z;
+	end GYRO_SUB_wrapper.i;
+
+	thread implementation GYRO.IMPL
+		calls
+			GYRO_CALL: {
+				gyro_sub: subprogram GYRO_SUB_wrapper.i;
+			};
+		connections
+			GYRO_PC1: parameter gyro_sub.gyro_out_data -> gyro_out_data;
+--			GYRO_PC2: parameter gyro_sub.gyro_out_data_y -> gyro_out_data_y;
+--			GYRO_PC3: parameter gyro_sub.gyro_out_data_z -> gyro_out_data_z;
+	end GYRO.IMPL;
+
+	thread ATTITUDE_CALCULATION
+		features
+			acc_in_data: in event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_in_data: in event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_in_data: in event data port provant_data::Tree_Axis_Mag.impl;
+--			acc_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_x: in event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_y: in event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_z: in event data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data2: in event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_in_data2: in event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_in_data2: in event data port provant_data::Tree_Axis_Mag.impl;
+			
+			acc_out_data: out event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_out_data: out event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_out_data: out event data port provant_data::Tree_Axis_Mag.impl;
+		--	DOF9_out_data: out event data port provant_data::Nine_Axis.impl;
+--			acc_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_x: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out event data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out event data port Types::FLOAT32_TYPE_AADL;
+		properties
+			Priority => 1;
+			Dispatch_Protocol => Periodic;
+			Period => 80ms;
+			Compute_Execution_Time => 0ms .. 65ms;
+			Stack_Size => 4096 Bytes;
+	end ATTITUDE_CALCULATION;
+
+	thread implementation ATTITUDE_CALCULATION.IMPL
+		calls
+			ATTITUDE_CALL: {
+				attitude_sub: subprogram ATTITUDE_SUB;
+			}; 
+		connections
+			
+			ACC_PC1: parameter acc_in_data -> attitude_sub.acc_in_data; 
+			ACC_PC2: parameter gyro_in_data -> attitude_sub.gyro_in_data; 
+			ACC_PC3: parameter mag_in_data -> attitude_sub.mag_in_data; 
+--			ACC_PC2: parameter acc_in_data_y -> attitude_sub.acc_in_data_y;
+--			ACC_PC3: parameter acc_in_data_z -> attitude_sub.acc_in_data_z;
+--			MAG_PC1: parameter mag_in_data_x -> attitude_sub.mag_in_data_x;
+--			MAG_PC2: parameter mag_in_data_y -> attitude_sub.mag_in_data_y;
+--			MAG_PC3: parameter mag_in_data_z -> attitude_sub.mag_in_data_z;
+--			GYRO_PC1: parameter gyro_in_data_x -> attitude_sub.gyro_in_data_x;
+--			GYRO_PC2: parameter gyro_in_data_y -> attitude_sub.gyro_in_data_y;
+--			GYRO_PC3: parameter gyro_in_data_z -> attitude_sub.gyro_in_data_z;
+	end ATTITUDE_CALCULATION.IMPL;
+
+		---------------
+		-- Processes --
+		---------------
+	process AHRS_Process
+		features
+			acc_in_data: in event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_in_data: in event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_in_data: in event data port provant_data::Tree_Axis_Mag.impl;
+--			acc_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_x: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_y: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_z: in data port Types::FLOAT32_TYPE_AADL;
+			acc_in_data2: in event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_in_data2: in event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_in_data2: in event data port provant_data::Tree_Axis_Mag.impl;
+		   -- DOF9_2: in event data port provant_data::Nine_Axis.impl;
+--			acc_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_x2: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_y2: in data port Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_z2: in data port Types::FLOAT32_TYPE_AADL;
+			--DOF9_out_data: out event data port provant_data::Nine_Axis.impl;
+--			acc_out_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_x: out data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out data port Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out data port Types::FLOAT32_TYPE_AADL;
+			roll_out_data: out data port provant_data::Tree_Axis_Acc.impl;
+			pitch_out_data: out data port provant_data::Tree_Axis_Mag.impl;
+			yaw_out_data: out data port provant_data::Tree_Axis_Gyro.impl;
+			
+			acc_outf_data: out event data port provant_data::Tree_Axis_Acc.impl;
+			gyro_outf_data: out event data port provant_data::Tree_Axis_Gyro.impl;
+			mag_outf_data: out event data port provant_data::Tree_Axis_Mag.impl;
+			
+				--acc_in_data_x_SYSTEM : in data port Types::FLOAT32_TYPE_AADL;
+--		flows
+--			f1: flow sink acc_in_data_x {latency => 10ms .. 20ms;}; -- XXX: consolidate to all ports
+	end AHRS_Process;
+
+	process ATTITUDE extends AHRS_Process
+	end ATTITUDE;
+
+	process implementation ATTITUDE.IMPL
+		subcomponents
+			accelero_thread: thread ACCELERO.IMPL;
+			magneto_thread: thread MAGNETO.IMPL;
+			gyro_thread: thread GYRO.IMPL;
+			attitude_calculation_thread: thread ATTITUDE_CALCULATION.IMPL;
+		connections
+			ACC_INPUT_PC1: port acc_in_data -> accelero_thread.acc_in_data;
+			MAG_INPUT_PC2: port mag_in_data -> magneto_thread.mag_in_data;
+			GYRO_INPUT_PC2: port gyro_in_data -> gyro_thread.gyro_in_data;
+--			ACC_INPUT_PC2: port acc_in_data_y -> accelero_thread.acc_in_data_y;
+--			ACC_INPUT_PC3: port acc_in_data_z -> accelero_thread.acc_in_data_z;
+--			MAG_INPUT_PC1: port mag_in_data_x -> magneto_thread.mag_in_data_x;
+--			MAG_INPUT_PC2: port mag_in_data_y -> magneto_thread.mag_in_data_y;
+--			MAG_INPUT_PC3: port mag_in_data_z -> magneto_thread.mag_in_data_z;
+--			GYRO_INPUT_PC1: port gyro_in_data_x -> gyro_thread.gyro_in_data_x;
+--			GYRO_INPUT_PC2: port gyro_in_data_y -> gyro_thread.gyro_in_data_y;
+--			GYRO_INPUT_PC3: port gyro_in_data_z -> gyro_thread.gyro_in_data_z;
+		--	ACC_INPUT_PC1r: port D -> accelero_thread.acc_in_data_x;	
+			ACC_INPUT2_PC1: port acc_in_data2 -> accelero_thread.acc_in_data;
+			MAG_INPUT2_PC2: port mag_in_data2 -> magneto_thread.mag_in_data;
+			GYRO_INPUT2_PC2: port gyro_in_data2 -> gyro_thread.gyro_in_data;
+--			ACC_INPUT_PC1r: port acc_in_data_x2 -> accelero_thread.acc_in_data_x;
+--			ACC_INPUT_PC2r: port acc_in_data_y2 -> accelero_thread.acc_in_data_y;
+--			ACC_INPUT_PC3r: port acc_in_data_z2 -> accelero_thread.acc_in_data_z;
+--			MAG_INPUT_PC1r: port mag_in_data_x2 -> magneto_thread.mag_in_data_x;
+--			MAG_INPUT_PC2r: port mag_in_data_y2 -> magneto_thread.mag_in_data_y;
+--			MAG_INPUT_PC3r: port mag_in_data_z2 -> magneto_thread.mag_in_data_z;
+--			GYRO_INPUT_PC1r: port gyro_in_data_x2 -> gyro_thread.gyro_in_data_x;
+--			GYRO_INPUT_PC2r: port gyro_in_data_y2 -> gyro_thread.gyro_in_data_y;
+--			GYRO_INPUT_PC3r: port gyro_in_data_z2 -> gyro_thread.gyro_in_data_z;
+			ACC_SUBMIT_PC1: port accelero_thread.acc_out_data -> attitude_calculation_thread.acc_in_data;
+--			ACC_SUBMIT_PC2: port accelero_thread.acc_out_data_y -> attitude_calculation_thread.acc_in_data_y;
+--			ACC_SUBMIT_PC3: port accelero_thread.acc_out_data_z -> attitude_calculation_thread.acc_in_data_z;
+			MAG_SUBMIT_PC1: port magneto_thread.mag_out_data -> attitude_calculation_thread.mag_in_data;
+--			MAG_SUBMIT_PC2: port magneto_thread.mag_out_data_y -> attitude_calculation_thread.mag_in_data_y;
+--			MAG_SUBMIT_PC3: port magneto_thread.mag_out_data_z -> attitude_calculation_thread.mag_in_data_z;
+			GYRO_SUBMIT_PC1: port gyro_thread.gyro_out_data -> attitude_calculation_thread.gyro_in_data;
+--			GYRO_SUBMIT_PC2: port gyro_thread.gyro_out_data_y -> attitude_calculation_thread.gyro_in_data_y;
+--			GYRO_SUBMIT_PC3: port gyro_thread.gyro_out_data_z -> attitude_calculation_thread.gyro_in_data_z;
+			--ACC_OUT_PC1: port attitude_calculation_thread.acc_out_data -> acc_out_data;
+--			ACC_OUT_PC1: port attitude_calculation_thread.acc_out_data_x -> acc_out_data_x;
+--			ACC_OUT_PC2: port attitude_calculation_thread.acc_out_data_y -> acc_out_data_y;
+--			ACC_OUT_PC3: port attitude_calculation_thread.acc_out_data_z -> acc_out_data_z;
+--			GYRO_OUT_PC4: port attitude_calculation_thread.gyro_out_data_x -> gyro_out_data_x;
+--			GYRO_OUT_PC5: port attitude_calculation_thread.gyro_out_data_y -> gyro_out_data_y;
+--			GYRO_OUT_PC6: port attitude_calculation_thread.gyro_out_data_z -> gyro_out_data_z;
+--			MAG_OUT_PC7: port attitude_calculation_thread.mag_out_data_x -> mag_out_data_x;
+--			MAG_OUT_PC8: port attitude_calculation_thread.mag_out_data_y -> mag_out_data_y;
+--			MAG_OUT_PC9: port attitude_calculation_thread.mag_out_data_z -> mag_out_data_z;
+				-- ACC_INPUT_PC4   : port  acc_in_data_x_SYSTEM ->  accelero_thread.acc_in_data_x_SYSTEM;
+--		flows
+--			f1: flow sink acc_in_data_x -> ACC_INPUT_PC1 -> accelero_thread.f1;
+	end ATTITUDE.IMPL;
+
+-----------------
+-- SUBPROGRAMS --
+-----------------
+	subprogram ACCELERO_SUB
+		features
+			acc_out_data: out parameter provant_data::Tree_Axis_Acc.impl; 
+--			acc_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			acc_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			--Source_Language => (CPP);
+			--Source_Name => "entryaccelero";
+			Source_Text => ("threads.cpp");
+	end ACCELERO_SUB;
+
+	subprogram MAGNETO_SUB
+		features
+			mag_out_data: out parameter provant_data::Tree_Axis_Mag.impl; 
+--			mag_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			mag_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			--Source_Language => (CPP);
+			--Source_Name => "entrymagneto";
+			Source_Text => ("threads.cpp");
+	end MAGNETO_SUB;
+
+	subprogram GYRO_SUB
+		features
+			gyro_out_data: out parameter provant_data::Tree_Axis_Gyro.impl; 
+--			gyro_out_data_x: out parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_y: out parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_out_data_z: out parameter Types::FLOAT32_TYPE_AADL;
+		properties
+		--	Source_Language => (CPP);
+			--Source_Name => "entrygyro";
+			Source_Text => ("threads.cpp");
+	end GYRO_SUB;
+
+	subprogram ATTITUDE_SUB
+		features
+			
+			--DOF9_in_data: in parameter provant_data::Nine_Axis.impl; 
+			acc_in_data: in parameter provant_data::Tree_Axis_Acc.impl;
+			gyro_in_data: in parameter provant_data::Tree_Axis_Gyro.impl;
+			mag_in_data: in parameter provant_data::Tree_Axis_Mag.impl;
+--			acc_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_x: in parameter Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_y: in parameter Types::FLOAT32_TYPE_AADL;
+--			acc_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+--			mag_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+--			gyro_in_data_z: in parameter Types::FLOAT32_TYPE_AADL;
+		properties
+			--Source_Language => (CPP);
+			--Source_Name => "entryattitude";
+			Source_Text => ("threads.cpp");
+	end ATTITUDE_SUB;
+
+end AHRS::Hardware::NAVIO2_1;

@@ -1,0 +1,23 @@
+--  This package models a generic AFDX device, to be later refined 
+
+package Devices::SBUS_TO_UART
+public
+	with Buses::UART;
+
+	------------------------------------
+	-- Generic_Converter SBUS to UART --
+	------------------------------------
+	device SBUS_TO_UART
+		features
+			sbus_data: in data port;
+			uart_data: out data port;
+			sbus_bus: requires bus access Buses::UART::UART.IMPL;
+			usart_bus: requires bus access Buses::UART::UART.IMPL;
+			
+	end SBUS_TO_UART;
+
+	device implementation SBUS_TO_UART.impl
+	end SBUS_TO_UART.impl;
+
+end Devices::SBUS_TO_UART;
+

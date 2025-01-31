@@ -1,0 +1,42 @@
+--  This package models a generic AFDX device, to be later refined 
+
+package Devices::MS6511
+public
+	with provant_data;
+
+	with Buses::I2C;
+
+	with Physical_Properties;
+
+	with Electricity_Properties;
+
+	------------------
+	-- PITOT SENSOR --
+	------------------
+	device MS6511
+		features
+			air_sensor_data: out data port provant_data::speed_air_data;
+			i2c_bus: requires bus access Buses::I2C::I2C.IMPL; 
+		flows
+			f1: flow source air_sensor_data {latency => 200us .. 500us;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 50ms;
+			Physical_Properties::Device_Functionality => (AirSpeed);
+			Electricity_Properties::Core_Voltage => 3.3V; -- 2.7 V - 3.3 power supply
+			Electricity_Properties::Device_Type => Slave;
+			Physical_Properties::Power_Consume => 0.02W;
+			Physical_Properties::Mass => 10.0g;
+	end MS6511;
+	
+	device implementation MS6511.impl
+		properties
+--  Initialize_Entrypoint => classifier (devices::motor_tm550::Initialize);
+  Electricity_Properties::Idle_Current => 5000.0 mA; -- Run current
+  Electricity_Properties::Run_Current => 13000.0 mA; -- Peak current
+  Electricity_Properties::Acquisition_Time => 1 ms;
+  Electricity_Properties::Core_Voltage => 14.4 V;
+	end MS6511.impl;
+
+end Devices::MS6511;
+
