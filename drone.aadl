@@ -1,3 +1,4 @@
+-- Sample line
 package drone  --LB: regarding 'connections', inform if it is immediate (->) or delayed (->>)
 public
 	with Buses::Ethernet;
