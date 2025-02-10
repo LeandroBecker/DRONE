@@ -146,8 +146,8 @@ public
 --			c11_b: bus access nucleo.pwm_bus -> pwm;
 --			c12_b: bus access nucleo.pwm_bus -> pwm;
 		--need a flow inside ros to go outside ros
---		flows
---			img2dir1: end to end flow  cam.imageFlow -> c3 -> ros.img2col -> c5 -> droneProcess.col2dir -> c7 -> ros.dirInOut -> c8 -> fltct.usedir_1 -> c9_p -> esc1.speedFlow; --misses the link between port and flow; implement the component 
+		flows
+			img2dir1: end to end flow  cam.imageFlow -> c3 -> ros.img2col -> c5 -> droneProcess.col2dir -> c7 -> ros.dirInOut -> c8 -> fsys.ndf; --  fltct.usedir_1 -> c9_p -> esc1.speedFlow;  
 		properties
 --			Latency => 1 sec .. 1 sec applies to img2dir1,img2dir2,img2dir3,img2dir4;  --img2dir;
 --			Actual_Processor_Binding => (reference (nucleo)) applies to fctrl;
@@ -197,16 +197,16 @@ public
 	device Flight_System
 		features
 			nextDirection: in data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
---		flows
---			newDirectionFlow: flow sink ndf {Latency => 15ms .. 50ms;}; --2do: revise timing values
+		flows
+			ndf: flow sink nextDirection {Latency => 15ms .. 50ms;}; --2do: revise timing values
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 100ms;
 	end Flight_System;
 
---	device implementation ESC.impl
+--	device implementation Flight_System.impl
 --		flows
---			speedFlow: flow sink speed 
---	end ESC.impl;
+--			ndf: flow sink nextDirection 
+--	end Flight_System.impl;
 
 end drone;
