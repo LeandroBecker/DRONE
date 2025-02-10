@@ -39,8 +39,8 @@
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="-41.00000762939453" y="96.0"/>
-          <point x="-29.00000762939453" y="96.0"/>
+          <point x="-41.0" y="96.0"/>
+          <point x="-29.0" y="96.0"/>
         </bendpoints>
       </element>
       <bo>
@@ -103,6 +103,14 @@
       </bo>
       <position x="970.0" y="270.0"/>
       <size width="130.0" height="85.0"/>
+    </element>
+    <element uuid="0db235c5-956b-45a4-9f0e-08761e87ea31" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Flight_System</seg>
+      </bo>
+      <position x="944.1666666666666" y="433.49999999999994"/>
+      <size width="130.0" height="36.0"/>
     </element>
     <element uuid="98f91681-5666-4352-bc3b-cce9a627b012" manual="true">
       <bo>
@@ -290,7 +298,7 @@
         <seg>classifier</seg>
         <seg>FlightController.impl</seg>
       </bo>
-      <position x="540.0" y="240.0"/>
+      <position x="440.0" y="220.0"/>
       <size width="370.0" height="320.0"/>
     </element>
     <element uuid="7279ac6c-42e0-47c9-9799-7a9558aaa2ea" manual="true">
