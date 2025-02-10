@@ -19,7 +19,7 @@
         </ownedValue>
         <propertyAssociation href="../Library/buses/buses-ethernet.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
-      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedBusSubcomponent.0"/>
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedBusSubcomponent.0"/>
       <index>0</index>
       <classifier xsi:type="aadl2:BusImplementation" href="../Library/buses/buses-ethernet.aadl#Buses.Ethernet.Ethernet.impl"/>
     </componentInstance>
@@ -89,7 +89,7 @@
         </ownedPropertyAssociation>
         <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedFlowSpecification.0"/>
       </flowSpecification>
-      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedDeviceSubcomponent.0"/>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDeviceSubcomponent.0"/>
       <index>0</index>
       <classifier xsi:type="aadl2:DeviceType" href="../drone.aadl#drone.Camera"/>
     </componentInstance>
@@ -115,7 +115,7 @@
       <featureInstance name="chargeLevel" direction="out">
         <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
       </featureInstance>
-      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedDeviceSubcomponent.1"/>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDeviceSubcomponent.1"/>
       <index>0</index>
       <classifier xsi:type="aadl2:DeviceType" href="../drone.aadl#drone.Battery"/>
     </componentInstance>
@@ -141,7 +141,7 @@
       <featureInstance name="temp" direction="out">
         <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
       </featureInstance>
-      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedDeviceSubcomponent.2"/>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDeviceSubcomponent.2"/>
       <index>0</index>
       <classifier xsi:type="aadl2:DeviceType" href="../drone.aadl#drone.Temperature"/>
     </componentInstance>
@@ -153,7 +153,7 @@
             <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
@@ -162,11 +162,11 @@
             <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.1"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedPropertyAssociation.1"/>
       </ownedPropertyAssociation>
       <featureInstance name="nextDirection">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Output_Time"/>
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Input_Time"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:ListValue">
               <ownedListElement xsi:type="aadl2:RecordValue">
@@ -190,11 +190,28 @@
               </ownedListElement>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedDataPort.0/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.0/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedDataPort.0"/>
+        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.0"/>
       </featureInstance>
-      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedDeviceSubcomponent.3"/>
+      <flowSpecification name="ndf" source="/0/@componentInstance.4/@featureInstance.0">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:RangeValue">
+              <minimum xsi:type="aadl2:IntegerLiteral" value="15">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </minimum>
+              <maximum xsi:type="aadl2:IntegerLiteral" value="50">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </maximum>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+        </ownedPropertyAssociation>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedFlowSpecification.0"/>
+      </flowSpecification>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDeviceSubcomponent.3"/>
       <index>0</index>
       <classifier xsi:type="aadl2:DeviceType" href="../drone.aadl#drone.Flight_System"/>
     </componentInstance>
@@ -203,19 +220,19 @@
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
-            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.8"/>
+            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.7"/>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <featureInstance name="bat">
-        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.0"/>
+        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
       </featureInstance>
       <featureInstance name="color">
-        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.1"/>
+        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
       </featureInstance>
       <featureInstance name="temp">
-        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.2"/>
+        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.2"/>
       </featureInstance>
       <featureInstance name="dir" direction="out">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -243,19 +260,19 @@
               </ownedListElement>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.3/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.3/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.3"/>
+        <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.3"/>
       </featureInstance>
       <componentInstance name="sw" category="thread">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:ListValue">
-              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.8"/>
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.7"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
@@ -264,7 +281,7 @@
               <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
@@ -273,7 +290,7 @@
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedPropertyAssociation.1"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Compute_Execution_Time"/>
@@ -287,10 +304,10 @@
               </maximum>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedPropertyAssociation.2"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.2"/>
         </ownedPropertyAssociation>
         <featureInstance name="color">
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.0"/>
         </featureInstance>
         <featureInstance name="dir" direction="out">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -318,15 +335,15 @@
                 </ownedListElement>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.1/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.1"/>
         </featureInstance>
         <featureInstance name="temp">
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.2"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.2"/>
         </featureInstance>
         <featureInstance name="bat">
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.3"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.3"/>
         </featureInstance>
         <flowSpecification name="col2dir" source="/0/@componentInstance.5/@componentInstance.0/@featureInstance.0" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.1">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -341,18 +358,18 @@
                 </maximum>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedFlowSpecification.0"/>
+          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.0"/>
         </flowSpecification>
-        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedThreadSubcomponent.0"/>
+        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedThreadSubcomponent.0"/>
         <index>0</index>
         <classifier xsi:type="aadl2:ThreadType" href="../drone.aadl#drone.ControlSW"/>
       </componentInstance>
       <flowSpecification name="col2dir" source="/0/@componentInstance.5/@featureInstance.1" destination="/0/@componentInstance.5/@featureInstance.3">
-        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedFlowSpecification.0"/>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedFlowSpecification.0"/>
       </flowSpecification>
-      <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedProcessSubcomponent.0"/>
+      <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedProcessSubcomponent.0"/>
       <index>0</index>
       <classifier xsi:type="aadl2:ProcessImplementation" href="../drone.aadl#drone.DroneProcess.impl"/>
     </componentInstance>
@@ -361,25 +378,25 @@
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
-            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.8"/>
+            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.7"/>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.1"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
       </ownedPropertyAssociation>
       <featureInstance name="batIn" category="eventDataPort">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.0"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.0"/>
       </featureInstance>
       <featureInstance name="tempIn" category="eventDataPort">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.1"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.1"/>
       </featureInstance>
       <featureInstance name="ImgIn" category="eventDataPort">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.2"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.2"/>
       </featureInstance>
       <featureInstance name="batOut" category="eventDataPort" direction="out">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.3"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.3"/>
       </featureInstance>
       <featureInstance name="tempOut" category="eventDataPort" direction="out">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.4"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.4"/>
       </featureInstance>
       <featureInstance name="colorOut" category="eventDataPort" direction="out">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -407,12 +424,12 @@
               </ownedListElement>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.5/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.5/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.5"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.5"/>
       </featureInstance>
       <featureInstance name="dirIn" category="eventDataPort">
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.6"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.6"/>
       </featureInstance>
       <featureInstance name="dirOut" category="eventDataPort" direction="out">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -440,19 +457,19 @@
               </ownedListElement>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.7/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.7/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedEventDataPort.7"/>
+        <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.7"/>
       </featureInstance>
       <componentInstance name="imgpr" category="thread">
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:ListValue">
-              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.8"/>
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.7"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.1"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
@@ -461,7 +478,7 @@
               <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
@@ -470,7 +487,7 @@
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.4"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.1"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Compute_Execution_Time"/>
@@ -484,10 +501,10 @@
               </maximum>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.2"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.2"/>
         </ownedPropertyAssociation>
         <featureInstance name="image">
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.0"/>
         </featureInstance>
         <featureInstance name="color" direction="out">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -515,9 +532,9 @@
                 </ownedListElement>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.1/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.1/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.1"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.1"/>
         </featureInstance>
         <flowSpecification name="im2col" source="/0/@componentInstance.6/@componentInstance.0/@featureInstance.0" destination="/0/@componentInstance.6/@componentInstance.0/@featureInstance.1">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -532,11 +549,11 @@
                 </maximum>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0"/>
+          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedFlowSpecification.0"/>
         </flowSpecification>
-        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedThreadSubcomponent.0"/>
+        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedThreadSubcomponent.0"/>
         <index>0</index>
         <classifier xsi:type="aadl2:ThreadType" href="../drone.aadl#drone.ImageProcessing"/>
       </componentInstance>
@@ -545,10 +562,10 @@
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:ListValue">
-              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.8"/>
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.7"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.1"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
@@ -557,7 +574,7 @@
               <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.0"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
@@ -566,7 +583,7 @@
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Compute_Execution_Time"/>
@@ -580,7 +597,7 @@
               </maximum>
             </ownedValue>
           </ownedValue>
-          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.2"/>
+          <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.2"/>
         </ownedPropertyAssociation>
         <featureInstance name="o" direction="out">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -608,9 +625,9 @@
                 </ownedListElement>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.0/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.0"/>
+          <feature xsi:type="aadl2:DataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
         </featureInstance>
         <featureInstance name="i" category="eventDataPort">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -618,7 +635,7 @@
             <ownedValue>
               <ownedValue xsi:type="aadl2:IntegerLiteral" value="10"/>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEventDataPort.0/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedEventDataPort.0/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
             <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Queue_Processing_Protocol"/>
@@ -627,9 +644,9 @@
                 <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.4/@ownedLiteral.0"/>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEventDataPort.0/@ownedPropertyAssociation.1"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedEventDataPort.0/@ownedPropertyAssociation.1"/>
           </ownedPropertyAssociation>
-          <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEventDataPort.0"/>
+          <feature xsi:type="aadl2:EventDataPort" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedEventDataPort.0"/>
         </featureInstance>
         <flowSpecification name="i2o" source="/0/@componentInstance.6/@componentInstance.1/@featureInstance.1" destination="/0/@componentInstance.6/@componentInstance.1/@featureInstance.0">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -644,101 +661,29 @@
                 </maximum>
               </ownedValue>
             </ownedValue>
-            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+            <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
           </ownedPropertyAssociation>
-          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedFlowSpecification.0"/>
+          <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0"/>
         </flowSpecification>
-        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedThreadSubcomponent.1"/>
+        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedThreadSubcomponent.1"/>
         <index>0</index>
         <classifier xsi:type="aadl2:ThreadType" href="../drone.aadl#drone.Publish"/>
       </componentInstance>
       <flowSpecification name="img2col" source="/0/@componentInstance.6/@featureInstance.2" destination="/0/@componentInstance.6/@featureInstance.5">
-        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.0"/>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.0"/>
       </flowSpecification>
       <flowSpecification name="dirInOut" source="/0/@componentInstance.6/@featureInstance.6" destination="/0/@componentInstance.6/@featureInstance.7">
-        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.1"/>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.1"/>
       </flowSpecification>
       <flowSpecification name="flow_bat" source="/0/@componentInstance.6/@featureInstance.0" destination="/0/@componentInstance.6/@featureInstance.3">
-        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.2"/>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.2"/>
       </flowSpecification>
       <flowSpecification name="flow_temp" source="/0/@componentInstance.6/@featureInstance.1" destination="/0/@componentInstance.6/@featureInstance.4">
-        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.3"/>
+        <flowSpecification href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.3"/>
       </flowSpecification>
-      <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedProcessSubcomponent.1"/>
+      <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedProcessSubcomponent.1"/>
       <index>0</index>
       <classifier xsi:type="aadl2:ProcessImplementation" href="../drone.aadl#drone.ROS.impl"/>
-    </componentInstance>
-    <componentInstance name="nucleo" category="processor">
-      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../Library/property_set/processor_properties.aadl#Processor_Properties.Processor_Frequency"/>
-        <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" value="168">
-            <unit href="../Library/property_set/processor_properties.aadl#/0/@ownedPropertyType.0/@ownedUnitsType/@ownedLiteral.2"/>
-          </ownedValue>
-        </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedPropertyAssociation.0"/>
-      </ownedPropertyAssociation>
-      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol"/>
-        <ownedValue>
-          <ownedValue xsi:type="aadl2:ListValue">
-            <ownedListElement xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.7/@ownedLiteral.2"/>
-            </ownedListElement>
-          </ownedValue>
-        </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedPropertyAssociation.1"/>
-      </ownedPropertyAssociation>
-      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../Library/property_set/processor_properties.aadl#Processor_Properties.Processor_Family"/>
-        <ownedValue>
-          <ownedValue xsi:type="aadl2:NamedValue">
-            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../Library/property_set/processor_properties.aadl#/0/@ownedProperty.0/@ownedPropertyType/@ownedLiteral.0"/>
-          </ownedValue>
-        </ownedValue>
-        <propertyAssociation href="../Library/processors/processors-arm.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.0"/>
-      </ownedPropertyAssociation>
-      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../Library/property_set/processor_properties.aadl#Processor_Properties.Endianess"/>
-        <ownedValue>
-          <ownedValue xsi:type="aadl2:NamedValue">
-            <namedValue xsi:type="aadl2:EnumerationLiteral" href="../Library/property_set/processor_properties.aadl#/0/@ownedProperty.2/@ownedPropertyType/@ownedLiteral.0"/>
-          </ownedValue>
-        </ownedValue>
-        <propertyAssociation href="../Library/processors/processors-arm.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.1"/>
-      </ownedPropertyAssociation>
-      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../Library/property_set/processor_properties.aadl#Processor_Properties.Word_Length"/>
-        <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" value="32">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.15/@ownedLiteral.0"/>
-          </ownedValue>
-        </ownedValue>
-        <propertyAssociation href="../Library/processors/processors-arm.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.2"/>
-      </ownedPropertyAssociation>
-      <featureInstance name="eth_bus" category="busAccess" type="/1">
-        <feature xsi:type="aadl2:BusAccess" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedBusAccess.0"/>
-      </featureInstance>
-      <featureInstance name="pwm_bus" category="busAccess" type="/2">
-        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
-          <ownedValue>
-            <ownedValue xsi:type="aadl2:RangeValue">
-              <minimum xsi:type="aadl2:IntegerLiteral" value="1">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-              </minimum>
-              <maximum xsi:type="aadl2:IntegerLiteral" value="1">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-              </maximum>
-            </ownedValue>
-          </ownedValue>
-          <propertyAssociation href="../Library/buses/buses-pwm.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.2"/>
-        </ownedPropertyAssociation>
-        <feature xsi:type="aadl2:BusAccess" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedBusAccess.1"/>
-      </featureInstance>
-      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedProcessorSubcomponent.0"/>
-      <index>0</index>
-      <classifier xsi:type="aadl2:ProcessorType" href="../drone.aadl#drone.Nucleof767zi"/>
     </componentInstance>
     <componentInstance name="jetson" category="processor">
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -748,7 +693,7 @@
             <unit href="../Library/property_set/processor_properties.aadl#/0/@ownedPropertyType.0/@ownedUnitsType/@ownedLiteral.2"/>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol"/>
@@ -759,7 +704,7 @@
             </ownedListElement>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedPropertyAssociation.1"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPropertyAssociation.1"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="../Library/property_set/processor_properties.aadl#Processor_Properties.Processor_Family"/>
@@ -789,12 +734,15 @@
         <propertyAssociation href="../Library/processors/processors-arm.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.2"/>
       </ownedPropertyAssociation>
       <featureInstance name="eth_bus" category="busAccess" type="/1">
-        <feature xsi:type="aadl2:BusAccess" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedBusAccess.0"/>
+        <feature xsi:type="aadl2:BusAccess" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedBusAccess.0"/>
       </featureInstance>
-      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedProcessorSubcomponent.1"/>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedProcessorSubcomponent.0"/>
       <index>0</index>
       <classifier xsi:type="aadl2:ProcessorType" href="../drone.aadl#drone.JetsonTX2"/>
     </componentInstance>
+    <endToEndFlow name="img2dir1" flowElement="/0/@componentInstance.1/@flowSpecification.0 /0/@connectionInstance.0 /0/@componentInstance.6/@componentInstance.0/@flowSpecification.0 /0/@connectionInstance.6 /0/@componentInstance.5/@componentInstance.0/@flowSpecification.0 /0/@connectionInstance.3 /0/@componentInstance.6/@componentInstance.1/@flowSpecification.0 /0/@connectionInstance.7 /0/@componentInstance.4/@flowSpecification.0">
+      <endToEndFlow href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEndToEndFlow.0"/>
+    </endToEndFlow>
     <connectionInstance name="cam.image -> ros.imgpr.image" complete="true" kind="portConnection" destination="/0/@componentInstance.6/@componentInstance.0/@featureInstance.0" source="/0/@componentInstance.1/@featureInstance.0">
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
@@ -808,23 +756,23 @@
             </maximum>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.1/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.1/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <connectionReference context="/0" source="/0/@componentInstance.1/@featureInstance.0" destination="/0/@componentInstance.6/@featureInstance.2">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.1"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.1"/>
       </connectionReference>
       <connectionReference context="/0/@componentInstance.6" source="/0/@componentInstance.6/@featureInstance.2" destination="/0/@componentInstance.6/@componentInstance.0/@featureInstance.0">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.0"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.0"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="bat.chargeLevel -> ros.batIn" complete="true" kind="portConnection" destination="/0/@componentInstance.6/@featureInstance.0" source="/0/@componentInstance.2/@featureInstance.0">
       <connectionReference context="/0" source="/0/@componentInstance.2/@featureInstance.0" destination="/0/@componentInstance.6/@featureInstance.0">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.2"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.2"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="temp.temp -> ros.tempIn" complete="true" kind="portConnection" destination="/0/@componentInstance.6/@featureInstance.1" source="/0/@componentInstance.3/@featureInstance.0">
       <connectionReference context="/0" source="/0/@componentInstance.3/@featureInstance.0" destination="/0/@componentInstance.6/@featureInstance.1">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.0"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.0"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="droneProcess.sw.dir -> ros.pubDir.i" complete="true" kind="portConnection" destination="/0/@componentInstance.6/@componentInstance.1/@featureInstance.1" source="/0/@componentInstance.5/@componentInstance.0/@featureInstance.1">
@@ -840,32 +788,32 @@
             </maximum>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedFeatureConnection.3/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedFeatureConnection.3/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@componentInstance.0/@featureInstance.1" destination="/0/@componentInstance.5/@featureInstance.3">
-        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedFeatureConnection.3"/>
+        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedFeatureConnection.3"/>
       </connectionReference>
       <connectionReference context="/0" source="/0/@componentInstance.5/@featureInstance.3" destination="/0/@componentInstance.6/@featureInstance.6">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.6"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.6"/>
       </connectionReference>
       <connectionReference context="/0/@componentInstance.6" source="/0/@componentInstance.6/@featureInstance.6" destination="/0/@componentInstance.6/@componentInstance.1/@featureInstance.1">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.2"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.2"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="ros.batOut -> droneProcess.sw.bat" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.3" source="/0/@componentInstance.6/@featureInstance.3">
       <connectionReference context="/0" source="/0/@componentInstance.6/@featureInstance.3" destination="/0/@componentInstance.5/@featureInstance.0">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.3"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.3"/>
       </connectionReference>
       <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.0" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.3">
-        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedFeatureConnection.0"/>
+        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedFeatureConnection.0"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="ros.tempOut -> droneProcess.sw.temp" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.2" source="/0/@componentInstance.6/@featureInstance.4">
       <connectionReference context="/0" source="/0/@componentInstance.6/@featureInstance.4" destination="/0/@componentInstance.5/@featureInstance.2">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.5"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.5"/>
       </connectionReference>
       <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.2" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.2">
-        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedFeatureConnection.2"/>
+        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedFeatureConnection.2"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="ros.imgpr.color -> droneProcess.sw.color" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.0" source="/0/@componentInstance.6/@componentInstance.0/@featureInstance.1">
@@ -881,16 +829,16 @@
             </maximum>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.1/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.1/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <connectionReference context="/0/@componentInstance.6" source="/0/@componentInstance.6/@componentInstance.0/@featureInstance.1" destination="/0/@componentInstance.6/@featureInstance.5">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.1"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.1"/>
       </connectionReference>
       <connectionReference context="/0" source="/0/@componentInstance.6/@featureInstance.5" destination="/0/@componentInstance.5/@featureInstance.1">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.4"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.4"/>
       </connectionReference>
       <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.1" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.0">
-        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedFeatureConnection.1"/>
+        <connection xsi:type="aadl2:FeatureConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedFeatureConnection.1"/>
       </connectionReference>
     </connectionInstance>
     <connectionInstance name="ros.pubDir.o -> fsys.nextDirection" complete="true" kind="portConnection" destination="/0/@componentInstance.4/@featureInstance.0" source="/0/@componentInstance.6/@componentInstance.1/@featureInstance.0">
@@ -906,13 +854,13 @@
             </maximum>
           </ownedValue>
         </ownedValue>
-        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.3/@ownedPropertyAssociation.0"/>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.3/@ownedPropertyAssociation.0"/>
       </ownedPropertyAssociation>
       <connectionReference context="/0/@componentInstance.6" source="/0/@componentInstance.6/@componentInstance.1/@featureInstance.0" destination="/0/@componentInstance.6/@featureInstance.7">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPortConnection.3"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.3"/>
       </connectionReference>
       <connectionReference context="/0" source="/0/@componentInstance.6/@featureInstance.7" destination="/0/@componentInstance.4/@featureInstance.0">
-        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedPortConnection.7"/>
+        <connection xsi:type="aadl2:PortConnection" href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPortConnection.7"/>
       </connectionReference>
     </connectionInstance>
     <classifier xsi:type="aadl2:SystemImplementation" href="../drone.aadl#drone.Drone.impl"/>
@@ -938,84 +886,5 @@
       <propertyAssociation href="../Library/buses/buses-ethernet.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.0"/>
     </ownedPropertyAssociation>
     <classifier xsi:type="aadl2:BusImplementation" href="../Library/buses/buses-ethernet.aadl#Buses.Ethernet.Ethernet.impl"/>
-  </instance:ComponentInstance>
-  <instance:ComponentInstance name="Buses::PWM::PWM.impl" category="bus">
-    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="../Library/property_set/bus_properties.aadl#Bus_Properties.Available_Bandwidth"/>
-      <ownedValue>
-        <ownedValue xsi:type="aadl2:ListValue">
-          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="9600">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.1"/>
-          </ownedListElement>
-          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="19200">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.1"/>
-          </ownedListElement>
-          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="38400">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.1"/>
-          </ownedListElement>
-          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="57600">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.1"/>
-          </ownedListElement>
-          <ownedListElement xsi:type="aadl2:IntegerLiteral" value="115200">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.1"/>
-          </ownedListElement>
-        </ownedValue>
-      </ownedValue>
-      <propertyAssociation href="../Library/buses/buses-pwm.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.0"/>
-    </ownedPropertyAssociation>
-    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="../Library/property_set/bus_properties.aadl#Bus_Properties.Bandwidth"/>
-      <ownedValue>
-        <ownedValue xsi:type="aadl2:IntegerLiteral" value="115200">
-          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.19/@ownedLiteral.0"/>
-        </ownedValue>
-      </ownedValue>
-      <propertyAssociation href="../Library/buses/buses-pwm.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.1"/>
-    </ownedPropertyAssociation>
-    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
-      <ownedValue>
-        <ownedValue xsi:type="aadl2:RangeValue">
-          <minimum xsi:type="aadl2:IntegerLiteral" value="1">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-          </minimum>
-          <maximum xsi:type="aadl2:IntegerLiteral" value="1">
-            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-          </maximum>
-        </ownedValue>
-      </ownedValue>
-      <propertyAssociation href="../Library/buses/buses-pwm.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.2"/>
-    </ownedPropertyAssociation>
-    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Transmission_Time"/>
-      <ownedValue>
-        <ownedValue xsi:type="aadl2:RecordValue">
-          <ownedFieldValue>
-            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#/0/@ownedProperty.14/@ownedPropertyType/@ownedField.0"/>
-            <ownedValue xsi:type="aadl2:RangeValue">
-              <minimum xsi:type="aadl2:IntegerLiteral" value="10">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-              </minimum>
-              <maximum xsi:type="aadl2:IntegerLiteral" value="30">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
-              </maximum>
-            </ownedValue>
-          </ownedFieldValue>
-          <ownedFieldValue>
-            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#/0/@ownedProperty.14/@ownedPropertyType/@ownedField.1"/>
-            <ownedValue xsi:type="aadl2:RangeValue">
-              <minimum xsi:type="aadl2:IntegerLiteral" value="1">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
-              </minimum>
-              <maximum xsi:type="aadl2:IntegerLiteral" value="10">
-                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
-              </maximum>
-            </ownedValue>
-          </ownedFieldValue>
-        </ownedValue>
-      </ownedValue>
-      <propertyAssociation href="../Library/buses/buses-pwm.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.3"/>
-    </ownedPropertyAssociation>
-    <classifier xsi:type="aadl2:BusImplementation" href="../Library/buses/buses-pwm.aadl#Buses.PWM.PWM.impl"/>
   </instance:ComponentInstance>
 </xmi:XMI>

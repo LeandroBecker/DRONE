@@ -196,7 +196,7 @@ public
 
 	device Flight_System
 		features
-			nextDirection: in data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
+			nextDirection: in data port {Input_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; --2do: check the timing info 
 		flows
 			ndf: flow sink nextDirection {Latency => 15ms .. 50ms;}; --2do: revise timing values
 		properties
