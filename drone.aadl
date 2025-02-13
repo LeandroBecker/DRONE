@@ -24,13 +24,15 @@ public
 			Period => 16666ns;
 	end Camera;
 
-	device Temperature
+	device Thermistor
 		features
 			temp: out data port;
+		flows
+			tempFlow: flow source temp {Latency => 1ms .. 20ms;};
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1 sec;
-	end Temperature;
+	end Thermistor;
 
 	thread ImageProcessing
 		features
@@ -118,7 +120,7 @@ public
 			--Devices:
 			cam: device Camera;
 			bat: device Battery;
-			temp: device Temperature;
+			therm: device Thermistor;
 			fsys: device Flight_System;
 			--esc1: device ESC;
 			--esc2: device ESC;
@@ -127,7 +129,7 @@ public
 			ethernet: bus Buses::Ethernet::Ethernet.impl;
 		--pwm: bus Buses::PWM::PWM.impl;
 		connections
-			c2: port temp.temp -> ros.tempIn; --also involve bus, so must be modeled the binding
+			c2: port therm.temp -> ros.tempIn; --also involve bus, so must be modeled the binding
 			c3: port cam.image -> ros.ImgIn {Latency => 10ms .. 20ms;};
 			c0: port bat.chargeLevel -> ros.batIn;
 			--LB: check if it is all connected

@@ -325,20 +325,33 @@
       <position x="277.0" y="138.0"/>
       <size width="309.0" height="270.0"/>
     </element>
-    <element uuid="b4f25482-75d5-42e5-a3bb-2132c95254d0" manual="true">
-      <element uuid="8c606649-748d-43a5-8d54-94a746df96af" manual="true" dockArea="right">
+    <element uuid="150fc5a9-1366-4d92-8984-f3dc758f5a56" manual="true">
+      <element uuid="994bb7a9-72ba-438c-a451-ea73762f3ec1" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>temp</seg>
         </bo>
-        <position x="128.35807418823242" y="10.0"/>
+        <position x="132.91275787353516"/>
+      </element>
+      <element uuid="fd8ae330-5f60-4ad3-9d47-8cfef03cd43a" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>tempFlow</seg>
+        </bo>
+        <position x="123.64192581176758" y="32.0"/>
+      </element>
+      <element uuid="c7231fcd-fcf6-413e-93e1-9079c839d71d" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
       </element>
       <bo>
         <seg>subcomponent</seg>
-        <seg>temp</seg>
+        <seg>therm</seg>
       </bo>
-      <position x="70.0" y="170.0"/>
-      <size width="170.0" height="60.0"/>
+      <position x="40.0" y="170.0"/>
+      <size width="174.55468368530273" height="60.0"/>
     </element>
     <bo>
       <seg>classifier</seg>
