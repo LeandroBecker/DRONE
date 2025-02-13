@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
   <element uuid="5dfd1f78-23a1-47a9-bec1-c3e0a2fe8110" manual="true">
-    <element uuid="d7e07ce0-828d-482f-8ed5-e13fd3861363" manual="true">
-      <bo>
-        <seg>classifier</seg>
-        <seg>Battery</seg>
-      </bo>
-      <position x="63.0" y="38.0"/>
-      <size width="99.0" height="35.0"/>
-    </element>
     <element uuid="7bad7c15-344e-49c6-9da8-7ea1c33c0ed7" manual="true">
       <bo>
         <seg>classifier</seg>
@@ -39,8 +31,8 @@
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="-11.0" y="186.0"/>
-          <point x="1.0" y="186.0"/>
+          <point x="259.0" y="316.0"/>
+          <point x="271.0" y="316.0"/>
         </bendpoints>
       </element>
       <bo>
@@ -64,8 +56,8 @@
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="-18.0" y="234.0"/>
-          <point x="-18.0" y="250.0"/>
+          <point x="252.0" y="364.0"/>
+          <point x="252.0" y="380.0"/>
         </bendpoints>
       </element>
       <bo>
@@ -87,8 +79,8 @@
         <seg>classifier</seg>
         <seg>Flight_System</seg>
       </bo>
-      <position x="740.0000000000001" y="240.0"/>
-      <size width="316.09766387939453" height="60.0"/>
+      <position x="800.0" y="260.0"/>
+      <size width="316.0" height="60.0"/>
     </element>
     <element uuid="1172ec91-d2c5-4dba-9f74-efb2f84612f6" manual="true">
       <bo>
@@ -105,14 +97,6 @@
       </bo>
       <position x="183.0" y="38.0"/>
       <size width="101.0" height="35.0"/>
-    </element>
-    <element uuid="56de26cb-aead-4183-b587-d01ef01a604f" manual="true">
-      <bo>
-        <seg>classifier</seg>
-        <seg>ROS</seg>
-      </bo>
-      <position x="197.0" y="203.0"/>
-      <size width="86.0" height="35.0"/>
     </element>
     <element uuid="51113017-4ba0-4b75-b6ef-807605d9d54b" manual="true">
       <element uuid="3569de91-c36c-42de-9f70-027571db06a5" manual="true">
@@ -175,14 +159,14 @@
           <seg>feature</seg>
           <seg>batOut</seg>
         </bo>
-        <position x="177.97396087646487" y="135.0"/>
+        <position x="177.97396087646484" y="135.0"/>
       </element>
       <element uuid="3b0ae9bf-b3ae-4bad-bffe-43225b82ed27" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>colorOut</seg>
         </bo>
-        <position x="167.60937500000003" y="45.0"/>
+        <position x="167.609375" y="45.0"/>
       </element>
       <element uuid="1369ec7a-033e-47a9-858b-b4706dd649b8" manual="true" dockArea="left">
         <bo>
@@ -196,7 +180,7 @@
           <seg>feature</seg>
           <seg>dirOut</seg>
         </bo>
-        <position x="181.6914100646973"/>
+        <position x="181.69141006469727"/>
       </element>
       <element uuid="571d7bc0-b81b-4a21-81c9-6ed9993ba3d9" manual="true" dockArea="left">
         <bo>
@@ -217,7 +201,7 @@
           <seg>feature</seg>
           <seg>tempOut</seg>
         </bo>
-        <position x="166.8671913146973" y="90.0"/>
+        <position x="166.86719131469727" y="90.0"/>
       </element>
       <element uuid="5aad7c42-f1b6-454b-88dd-dd80a024ffab" manual="true">
         <bo>
@@ -232,7 +216,7 @@
           <seg>subcomponent</seg>
           <seg>imgpr</seg>
         </bo>
-        <position x="30.00000000000003" y="40.00000000000003"/>
+        <position x="30.0" y="40.0"/>
         <size width="130.0" height="36.0"/>
       </element>
       <element uuid="94e84c00-010d-485f-bd52-96273ac1a685" manual="true">
@@ -240,15 +224,15 @@
           <seg>subcomponent</seg>
           <seg>pubDir</seg>
         </bo>
-        <position x="70.00000000000003" y="330.0"/>
+        <position x="70.0" y="330.0"/>
         <size width="130.0" height="36.0"/>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>ROS.impl</seg>
       </bo>
-      <position x="350.0" y="210.0"/>
-      <size width="230.00000000000003" height="400.0"/>
+      <position x="450.0" y="220.0"/>
+      <size width="230.0" height="400.0"/>
     </element>
     <element uuid="3599bdde-3bc0-4dcc-b94a-ff9f8c7854de" manual="true">
       <bo>
@@ -262,10 +246,10 @@
       <seg>package</seg>
       <seg>drone</seg>
     </bo>
-    <position x="-200.0" y="-90.0"/>
-    <size width="1216.0976638793945" height="670.0"/>
+    <position x="70.0" y="40.0"/>
+    <size width="1216.0" height="670.0"/>
   </element>
-  <config type="package" connectionPrimaryLabelsVisible="false">
+  <config type="package">
     <enabledAadlProperties/>
     <context>
       <seg>package</seg>

@@ -741,6 +741,20 @@
       <classifier xsi:type="aadl2:ProcessorType" href="../drone.aadl#drone.JetsonTX2"/>
     </componentInstance>
     <endToEndFlow name="img2dir1" flowElement="/0/@componentInstance.1/@flowSpecification.0 /0/@connectionInstance.0 /0/@componentInstance.6/@componentInstance.0/@flowSpecification.0 /0/@connectionInstance.6 /0/@componentInstance.5/@componentInstance.0/@flowSpecification.0 /0/@connectionInstance.3 /0/@componentInstance.6/@componentInstance.1/@flowSpecification.0 /0/@connectionInstance.7 /0/@componentInstance.4/@flowSpecification.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="500">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEndToEndFlow.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
       <endToEndFlow href="../drone.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedEndToEndFlow.0"/>
     </endToEndFlow>
     <connectionInstance name="cam.image -> ros.imgpr.image" complete="true" kind="portConnection" destination="/0/@componentInstance.6/@componentInstance.0/@featureInstance.0" source="/0/@componentInstance.1/@featureInstance.0">
