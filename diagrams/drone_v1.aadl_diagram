@@ -85,7 +85,7 @@
     <element uuid="1172ec91-d2c5-4dba-9f74-efb2f84612f6" manual="true">
       <bo>
         <seg>classifier</seg>
-        <seg>ImageProcessing</seg>
+        <seg>ThermalImageProcessing</seg>
       </bo>
       <position x="63.0" y="148.0"/>
       <size width="160.0" height="35.0"/>
