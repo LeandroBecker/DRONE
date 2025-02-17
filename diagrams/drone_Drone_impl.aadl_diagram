@@ -73,23 +73,6 @@
         <seg>c6</seg>
       </bo>
     </element>
-    <element uuid="322eade7-68e2-4de7-aacd-6f607b23131f" manual="true">
-      <element uuid="4dfc512c-04cb-4703-991a-009dafc37eaf" manual="true">
-        <bo>
-          <seg>tag</seg>
-          <seg>unidirectional</seg>
-        </bo>
-      </element>
-      <bo>
-        <seg>connection</seg>
-        <seg>c7</seg>
-      </bo>
-      <bendpoints>
-        <point x="1205.0" y="65.0"/>
-        <point x="745.0" y="62.0"/>
-        <point x="291.0" y="132.0"/>
-      </bendpoints>
-    </element>
     <element uuid="991b3b14-c677-4b13-b1f6-2932b1b4e276" manual="true">
       <element uuid="7a99f2a1-eead-4336-8167-2eceb22c0066" manual="true">
         <bo>
@@ -101,6 +84,10 @@
         <seg>connection</seg>
         <seg>c8</seg>
       </bo>
+      <bendpoints>
+        <point x="1180.0" y="132.0"/>
+        <point x="1178.0" y="510.0"/>
+      </bendpoints>
     </element>
     <element uuid="3f1c021e-1813-47d5-ad89-3961d8a734be" manual="true">
       <bo>
@@ -148,6 +135,7 @@
           <seg>connection</seg>
           <seg>dpic1</seg>
         </bo>
+        <primaryLabelPosition x="-22.0" y="7.5"/>
       </element>
       <element uuid="89a5c7b6-6824-4c12-a5e6-70c8fc9bfe4e" manual="true">
         <element uuid="3882a73d-eb03-44c0-8a9d-b914bfef1bc2" manual="true">
@@ -160,7 +148,7 @@
           <seg>connection</seg>
           <seg>dpic2</seg>
         </bo>
-        <primaryLabelPosition x="-25.0" y="-76.0"/>
+        <primaryLabelPosition x="-10.0" y="7.5"/>
       </element>
       <element uuid="932fb500-9817-4b8b-b8e9-4cd734b30655" manual="true">
         <element uuid="7b7dca2b-208f-42cc-9960-8e2c5141d859" manual="true">
@@ -173,7 +161,7 @@
           <seg>connection</seg>
           <seg>dpic3</seg>
         </bo>
-        <primaryLabelPosition x="-20.0" y="-55.0"/>
+        <primaryLabelPosition x="2.0" y="20.0"/>
       </element>
       <element uuid="a3181283-b4ff-40e8-bd99-245d5ac50510" manual="true">
         <element uuid="4a5d9759-2aa5-4334-909f-a165946ffe4a" manual="true">
@@ -192,28 +180,49 @@
           <seg>feature</seg>
           <seg>color</seg>
         </bo>
-        <position y="130.0"/>
+        <position y="150.0"/>
       </element>
       <element uuid="271db5d8-5cf2-4e01-ab11-8e9da715939a" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>dir</seg>
         </bo>
-        <position x="331.0624656677246"/>
+        <position x="383.1822929382324"/>
       </element>
       <element uuid="bf9980f4-5988-4379-9239-08eecbcb0a88" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>high_temp</seg>
         </bo>
-        <position y="175.0"/>
+        <position y="195.0"/>
       </element>
       <element uuid="a237d446-9f1d-4881-85f0-354aa4c0c1be" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>temp</seg>
         </bo>
-        <position y="220.0"/>
+        <position y="100.0"/>
+      </element>
+      <element uuid="5f8429a2-5d6a-4895-878d-d1b182474e50" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>col2dirflw</seg>
+        </bo>
+        <primaryLabelPosition x="-134.0" y="9.0"/>
+      </element>
+      <element uuid="72c02e0d-7d1a-4861-9ac7-f11fef10e794" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>temp2dirflw</seg>
+        </bo>
+        <primaryLabelPosition x="-148.0" y="-9.0"/>
+      </element>
+      <element uuid="4e839314-8049-46f3-a3fa-837eac0e8278" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>therm2dirflw</seg>
+        </bo>
+        <primaryLabelPosition x="9.0" y="-7.5"/>
       </element>
       <element uuid="0f7639cf-3c03-434c-8cfb-0600ff409b3b" manual="true">
         <element uuid="aa01ea4f-95f5-429c-8d3a-13f3eb184a1f" manual="true" dockArea="left">
@@ -221,43 +230,43 @@
             <seg>feature</seg>
             <seg>color</seg>
           </bo>
-          <position y="100.0"/>
+          <position y="85.0"/>
         </element>
         <element uuid="ee410ddf-2940-46fd-8309-20305c95671a" manual="true" dockArea="right">
           <bo>
             <seg>feature</seg>
             <seg>dir</seg>
           </bo>
-          <position x="221.0624656677246" y="50.0"/>
+          <position x="221.18229293823242" y="50.0"/>
         </element>
         <element uuid="13bdfda1-eb12-4293-8edb-b3a5ac4a4ed3" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>high_temp</seg>
           </bo>
-          <position y="50.0"/>
+          <position y="130.0"/>
         </element>
         <element uuid="e1b7ab41-c307-4ff0-805b-cb7bb17858a7" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>temp</seg>
           </bo>
-          <position/>
+          <position y="40.0"/>
         </element>
         <element uuid="3df3cd7b-eb43-442f-bbc1-cc32e9f239b3" manual="true">
           <bo>
             <seg>flow_specification</seg>
             <seg>col2dirflw</seg>
           </bo>
-          <bendpoints>
-            <point x="994.796875" y="302.0"/>
-          </bendpoints>
         </element>
         <element uuid="5d1bdec5-617c-486f-8403-5f9a111889d5" manual="true">
           <bo>
             <seg>flow_specification</seg>
             <seg>hight2dirflw</seg>
           </bo>
+          <bendpoints>
+            <point x="996.0" y="419.0"/>
+          </bendpoints>
         </element>
         <element uuid="2e2f0d15-90be-4a7c-8626-863566c6229c" manual="true">
           <bo>
@@ -265,15 +274,15 @@
             <seg>temp2dirflw</seg>
           </bo>
           <bendpoints>
-            <point x="994.796875" y="202.0"/>
+            <point x="974.0" y="346.0"/>
           </bendpoints>
         </element>
         <bo>
           <seg>subcomponent</seg>
           <seg>sw</seg>
         </bo>
-        <position x="80.0" y="70.0"/>
-        <size width="247.8801727294922" height="140.0"/>
+        <position x="100.0" y="180.0"/>
+        <size width="248.0" height="180.0"/>
       </element>
       <element uuid="adf1c159-6583-4b1e-bd89-804cfedb1ed6" manual="true">
         <bo>
@@ -285,8 +294,8 @@
         <seg>subcomponent</seg>
         <seg>droneProcess</seg>
       </bo>
-      <position x="760.0" y="80.0"/>
-      <size width="357.8801727294922" height="330.0"/>
+      <position x="720.0" y="80.0"/>
+      <size width="410.0" height="400.0"/>
     </element>
     <element uuid="3e442938-74fa-4f19-bc33-52a5dd183ea3" manual="true">
       <element uuid="a4352b4b-f84c-4954-accf-d805192d460c" manual="true">
@@ -299,51 +308,61 @@
         <seg>subcomponent</seg>
         <seg>fsys</seg>
       </bo>
-      <position x="690.0" y="450.0"/>
+      <position x="700.0" y="500.0"/>
       <size width="250.0" height="80.0"/>
     </element>
     <element uuid="4aff8ac0-f987-4858-94f9-3b1384facdd0" manual="true">
+      <element uuid="79eb5605-a4eb-4448-8ba1-be28dd93ae6c" manual="true">
+        <element uuid="b4f0a941-3e80-4012-81ef-f940f526369e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="3c093686-e7a1-4950-aadd-293b45510327" manual="true">
+        <element uuid="52a61eee-f4b9-46a9-9b3a-1aa04eb87d87" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
       <element uuid="8211d04f-59ff-4991-a3f8-68fd72373c17" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>colorOut</seg>
         </bo>
-        <position x="246.609375" y="158.0"/>
-      </element>
-      <element uuid="e3c12cc9-4e15-4ccd-ab5b-881151990956" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>dirIn</seg>
-        </bo>
-        <position y="20.0"/>
-      </element>
-      <element uuid="07d290a1-dc10-4b34-a8e1-cf562bcead57" manual="true" dockArea="right">
-        <bo>
-          <seg>feature</seg>
-          <seg>dirOut</seg>
-        </bo>
-        <position x="260.69141006469727" y="98.0"/>
+        <position x="257.609375" y="158.0"/>
       </element>
       <element uuid="0cc14f92-4ad3-4ac2-955a-e3bc61578398" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>htIn</seg>
         </bo>
-        <position y="203.0"/>
+        <position y="290.0"/>
       </element>
       <element uuid="2e620a32-f3de-445d-a2d2-2c8bfff69b4c" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>htOut</seg>
         </bo>
-        <position x="264.3893241882324" y="203.0"/>
+        <position x="275.3893241882324" y="290.0"/>
       </element>
       <element uuid="dcd098a8-db97-4580-a313-4c04ae4c0fc6" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>imgIn</seg>
         </bo>
-        <position y="158.0"/>
+        <position y="220.0"/>
       </element>
       <element uuid="4d9b9114-4c44-4a87-bd88-1f92ccb3c849" manual="true" dockArea="left">
         <bo>
@@ -357,13 +376,7 @@
           <seg>feature</seg>
           <seg>tempOut</seg>
         </bo>
-        <position x="245.86719131469727" y="38.0"/>
-      </element>
-      <element uuid="d676bfc5-de49-4f91-9fd8-76db58fc1451" manual="true">
-        <bo>
-          <seg>flow_specification</seg>
-          <seg>dirInOutflw</seg>
-        </bo>
+        <position x="256.86719131469727" y="38.0"/>
       </element>
       <element uuid="346b8ca1-1bd5-4515-934f-ea1276cf9dfc" manual="true">
         <bo>
@@ -371,12 +384,61 @@
           <seg>hightempflw</seg>
         </bo>
       </element>
+      <element uuid="0f18771d-536f-4d10-92c5-e40d22f32589" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>img2colflw</seg>
+        </bo>
+        <bendpoints>
+          <point x="572.0" y="411.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="b8f0e8ba-ced4-4da0-9b21-d5d28e27e365" manual="true">
+        <bo>
+          <seg>flow_specification</seg>
+          <seg>tempflw</seg>
+        </bo>
+      </element>
+      <element uuid="adede1e6-7a5d-489b-9bf4-bc531a493602" manual="true">
+        <element uuid="f021f4a3-607d-42dc-868e-00ebbf50ea9e" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>color</seg>
+          </bo>
+          <position x="109.10025978088379" y="26.0"/>
+        </element>
+        <element uuid="89c7803f-c77e-4b75-809d-1dd2c05fdce4" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>image</seg>
+          </bo>
+          <position y="26.0"/>
+        </element>
+        <element uuid="11a2a766-94b8-4d3c-9f0d-b10a57334487" manual="true">
+          <bo>
+            <seg>flow_specification</seg>
+            <seg>im2col</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>imgpr</seg>
+        </bo>
+        <position x="70.0" y="140.0"/>
+        <size width="150.0" height="66.0"/>
+      </element>
+      <element uuid="b09b4d85-8c7f-4817-bd91-3e6314426978" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
       <bo>
         <seg>subcomponent</seg>
         <seg>ros</seg>
       </bo>
       <position x="320.0" y="140.0"/>
-      <size width="309.0" height="270.0"/>
+      <size width="320.0" height="390.0"/>
     </element>
     <element uuid="150fc5a9-1366-4d92-8984-f3dc758f5a56" manual="true">
       <element uuid="c37dd288-9090-44b9-95cb-0106a274e4de" manual="true" dockArea="right">
@@ -391,8 +453,8 @@
           <seg>flow_specification</seg>
           <seg>highTempFlow</seg>
         </bo>
-        <position x="124.29035949707031" y="42.0"/>
-        <primaryLabelPosition x="-145.14517974853516" y="2.0"/>
+        <position x="124.0" y="42.0"/>
+        <primaryLabelPosition x="-145.0" y="2.0"/>
       </element>
       <element uuid="c7231fcd-fcf6-413e-93e1-9079c839d71d" manual="true">
         <bo>
@@ -413,7 +475,7 @@
           <seg>feature</seg>
           <seg>temp</seg>
         </bo>
-        <position x="102.55468368530273"/>
+        <position x="102.35807418823242"/>
       </element>
       <element uuid="866fe996-c9fb-460a-9db8-a4b9ed991628" manual="true">
         <bo>
@@ -421,14 +483,14 @@
           <seg>tempFlow</seg>
         </bo>
         <position x="87.0" y="32.0"/>
-        <primaryLabelPosition x="-95.09830474853516" y="-13.0"/>
+        <primaryLabelPosition x="-95.0" y="-13.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
         <seg>tsensor</seg>
       </bo>
       <position x="100.0" y="210.0"/>
-      <size width="144.1966094970703" height="56.0"/>
+      <size width="144.0" height="56.0"/>
     </element>
     <bo>
       <seg>classifier</seg>
