@@ -118,7 +118,7 @@
       <element uuid="692728e3-b2c6-4503-9a98-4a8ed6d73dec" manual="true">
         <bo>
           <seg>flow_specification</seg>
-          <seg>imageGenerationFlow</seg>
+          <seg>imageFlow</seg>
         </bo>
         <position x="60.0" y="40.0"/>
         <primaryLabelPosition x="-112.0" y="-35.0"/>
@@ -418,7 +418,7 @@
       <element uuid="866fe996-c9fb-460a-9db8-a4b9ed991628" manual="true">
         <bo>
           <seg>flow_specification</seg>
-          <seg>tempMeasureFlow</seg>
+          <seg>tempFlow</seg>
         </bo>
         <position x="87.0" y="32.0"/>
         <primaryLabelPosition x="-95.09830474853516" y="-13.0"/>
