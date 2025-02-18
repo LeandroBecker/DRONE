@@ -18,7 +18,7 @@ public
 
 	device ThermalCamera
 		features
-			image: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
+			image: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; -- Ainda não entendi pq o "Output_Time é util aqui"
 		flows
 			imageFlow: flow source image {Latency => 25ms .. 50ms;};
 		properties
@@ -56,13 +56,9 @@ public
 
 			htOut: out event data port;
 			tempOut: out event data port;
-			colorOut: out event data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
-			
-			dirIn: in event data port;
-			dirOut: out event data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
+			colorOut: out event data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; -- Pq é importante ter a latência da porta?
 		flows
 			img2colflw: flow path imgIn -> colorOut;
-			dirInOutflw: flow path dirIn -> dirOut;
 			hightempflw: flow path htIn -> htOut;
 			tempflw: flow path tempIn -> tempOut;
 	end ROS;
@@ -70,28 +66,12 @@ public
 	process implementation ROS.impl
 		subcomponents
 			imgpr: thread ImageProcessing;
-			pubDir: thread Publish;
 		connections
-			c1: port imgIn -> imgpr.image {Latency => 10ms .. 20ms;};
+			c1: port imgIn -> imgpr.image {Latency => 10ms .. 20ms;}; -- A latência na conexão pode ser importante, porém se o tempo de execução da tarefa contabiliza essa latencia, então ela acaba por super estimar a latência fim-a-fim.
 			c2: port imgpr.color -> colorOut {Latency => 1ms .. 2ms;};
-			c3: port dirIn -> pubDir.i {Latency => 1ms .. 2ms;};
-			c4: port pubDir.o -> dirOut {Latency => 1ms .. 2ms;};
 		flows
 			img2colflw: flow path imgIn -> c1 -> imgpr.im2col -> c2 -> colorOut;
-			dirInOutflw: flow path dirIn -> c3 -> pubDir.i2o -> c4 -> dirOut;
 	end ROS.impl;
-
-	thread Publish
-		features
-			o: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
-			i: in event data port {Queue_Size => 10; Queue_Processing_Protocol => FIFO;};
-		flows
-			i2o: flow path i -> o {Latency => 2ms .. 5ms;};
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 5ms;
-			Compute_Execution_Time => 1ms .. 2ms;
-	end Publish;
 
 	thread ControlSW
 		features
@@ -137,12 +117,11 @@ public
 			c4: port ros.htOut -> droneProcess.high_temp;
 			c5: port ros.colorOut -> droneProcess.color {Latency => 1ms .. 2ms;};
 			c6: port ros.tempOut -> droneProcess.temp {Latency => 1ms .. 2ms;};
-			c7: port droneProcess.dir -> ros.dirIn {Latency => 1ms .. 2ms;};
-			c8: port ros.dirOut -> fsys.nextDirection {Latency => 1ms .. 2ms;};
+			c8: port droneProcess.dir -> fsys.nextDirection {Latency => 1ms .. 2ms;};
 		flows
-			img2dir_flw: end to end flow  cam.imageFlow -> c3 -> ros.img2colflw -> c5 -> droneProcess.col2dirflw -> c7 -> ros.dirInOutflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
-			temp2dir_flw: end to end flow tsensor.tempFlow -> c2 -> ros.tempflw -> c6 -> droneProcess.temp2dirflw -> c7 -> ros.dirInOutflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
-			highTemp2dir_flw: end to end flow therm.highTempFlow -> c1 -> ros.hightempflw -> c4 -> droneProcess.therm2dirflw -> c7 -> ros.dirInOutflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
+			img2dir_flw: end to end flow  cam.imageFlow -> c3 -> ros.img2colflw -> c5 -> droneProcess.col2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
+			temp2dir_flw: end to end flow tsensor.tempFlow -> c2 -> ros.tempflw -> c6 -> droneProcess.temp2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
+			highTemp2dir_flw: end to end flow therm.highTempFlow -> c1 -> ros.hightempflw -> c4 -> droneProcess.therm2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
 		properties
 			Actual_Processor_Binding => (reference (jetson)) applies to droneProcess;
 			Actual_Processor_Binding => (reference (jetson)) applies to ros;
