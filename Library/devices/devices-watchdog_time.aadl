@@ -1,0 +1,23 @@
+package Devices::WATCHDOG_TIME_CAT1161
+public
+	with Buses::UART;
+
+	with Buses::I2C;
+
+-----------------
+--   DEVICE   --
+-----------------
+	device WATCHDOG_TIME_CAT1161
+		features
+			i2c_bus: requires bus access Buses::I2C::I2C.impl;
+			reset: out event port;
+	end WATCHDOG_TIME_CAT1161;
+
+-- max operation frequency 500Hz, max speed rpm 5000 , number of channels 2
+	device implementation WATCHDOG_TIME_CAT1161.impl
+	end WATCHDOG_TIME_CAT1161.impl;
+  
+  
+  
+end Devices::WATCHDOG_TIME_CAT1161;
+ 

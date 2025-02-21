@@ -1,0 +1,32 @@
+package devices::MOTOR::AXI2835GLV2LONG
+public
+	with Electricity_Properties;
+	with Device_Property;
+
+-----------------
+--   DEVICE   --
+-----------------
+	device AXI2835GLV2LONG
+		features
+			phase_in: in data port;
+		flows
+			f1: flow sink phase_in {latency => 100us .. 100us;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 50ms;
+			Device_Property::Power_Consume => 1190.00W;
+			Device_property::Mass => 257.0g;
+			Device_property::Max_Efficiency => 85.0 percent;
+			Device_property::Device_Functionality => (BrushlessMotor);
+			Electricity_Properties::Peak_Current => 26.0A;
+			Device_property::Max_No_Cells => 4.0 cells;
+			Device_Property::RPM_per_Volt => 690 RpmV;
+			Device_property::LIFT3D => 3000.0g;
+			
+	end AXI2835GLV2LONG;
+
+	device implementation AXI2835GLV2LONG.impl
+	end AXI2835GLV2LONG.impl;
+
+
+end devices::MOTOR::AXI2835GLV2LONG;

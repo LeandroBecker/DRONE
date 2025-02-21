@@ -1,0 +1,23 @@
+package Boards::NUCLEOF767ZI
+public
+	with Buses::I2C;
+
+	with Processors::ARM;
+
+	with Buses::UART;
+
+	with Buses::SPI;
+
+	with Processor_Properties;
+
+	processor Nucleof767zi extends Processors::ARM::Generic_ARM
+		features
+			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
+			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+			uart_bus: requires bus access Buses::UART::UART.IMPL;
+		properties
+			Processor_Properties::Processor_Frequency => 168 Mhz;
+			Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
+	end Nucleof767zi;
+	
+	 end Boards::NUCLEOF767ZI;

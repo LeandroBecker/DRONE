@@ -1,0 +1,23 @@
+--  This package models a generic AFDX device, to be later refined 
+
+package Devices::RS422_TO_USART
+public
+	with Buses::UART;
+
+	------------------------------------
+	-- Generic_Converter RS422 to UsART --
+	------------------------------------
+	device RS422_TO_USART
+		features
+			usart_data: in data port;
+			rs422_data: out data port;
+			rs422_bus: requires bus access Buses::UART::UART.IMPL;
+			usart_bus: requires bus access Buses::UART::UART.IMPL;
+			
+	end RS422_TO_USART;
+
+	device implementation RS422_TO_USART.impl
+	end RS422_TO_USART.impl;
+
+end Devices::RS422_TO_USART;
+

@@ -1,181 +1,93 @@
-package drone 
+-- Sample line
+package drone  --LB: regarding 'connections', inform if it is immediate (->) or delayed (->>)
 public
+	with Buses::Ethernet;
+	with Processors::ARM;
+--	with Buses::PWM;
+	with Processor_Properties;
 
-
-	virtual bus ROS2
-		
-	end ROS2;
-	
-	virtual bus implementation ROS2.impl
-		
-	end ROS2.impl;
-
-	Processor DroneCompanionComputer
-		properties
-			Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);	
-	end DroneCompanionComputer;
-
-	device FlightController
-		features
-			nextDirection: in data port;  
-		flows
-			ndf: flow sink nextDirection {Latency => 15ms .. 50ms;}; --2do: revise timing values
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 100ms;
-	end FlightController;
-
-
-	-- A thermal camera outputs a visual image that shows temperature variations in an area. 
-	-- This image is created by converting infrared radiation emitted by objects into visible light.
-	-- The image created have a dimension of N x M pixels and a sample rate from 20 FPS to 40 FPS.
-	device ThermalCamera
-		features
-			image: out data port;
-			-- It is important to put the "Output_Time" parameter?
-			--image: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
-		flows
-			imageGenerationFlow: flow source image {Latency => 25ms .. 50ms;};
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 50ms;
-	end ThermalCamera;
-
-	thread ThermalImageProcessing
-		features
-			image: in data port;  -- Image read from I2C interface.
-			color: out data port; -- A integer number representing the predominant color in the image. 
-			--color: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
-		flows
-			im2col: flow path image -> color;
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 1 sec;
-			Compute_Execution_Time => 200ms .. 400ms;
-	end ThermalImageProcessing;
-
-	process ThermalImageProcessingProc
-		features
-			image: in data port;  -- Image read from I2C interface.
-			color: out data port; -- A integer number representing the predominant color in the image. 
-			--color: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
-		flows
-			im2col: flow path image -> color;
-	end ThermalImageProcessingProc;
-
-	process implementation ThermalImageProcessingProc.impl
-		subcomponents
-			ThermalImageProcessingThread: thread ThermalImageProcessing;
-		connections
-			c1: port image -> ThermalImageProcessingThread.image;
-			c2: port ThermalImageProcessingThread.color -> color;
-		flows
-			im2col: flow path image -> c1 -> ThermalImageProcessingThread.im2col -> c2 -> color;
-	end ThermalImageProcessingProc.impl;
-
-
-	-- Thermostat is a device that output a boolean flag indicates temperature goes high than a pre-defined threshold.
-	-- It has a high sample time compared to other solutions.
 	device Thermostat
 		features
-			highTempFlag: out event port; -- output flag indicating that threshold temperature was reached.
+			highTemp: out data port;
 		flows
-			highTempMeasureFlow: flow source highTempFlag {Latency => 100ns .. 1000ns;};
+			highTempFlow: flow source highTemp {Latency => 100ns .. 1000ns;};
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ns;
 	end Thermostat;
 
-	-- The temperature sensor (different from the thermostat) generates an 
-	-- analog output signal proportional to the measured temperature in binary format. 
+	device ThermalCamera
+		features
+			image: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; -- Ainda não entendi pq o "Output_Time é util aqui"
+		flows
+			imageFlow: flow source image {Latency => 25ms .. 50ms;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 50ms;
+	end ThermalCamera;
+
 	device TempSensor
 		features
-			temp: out data port; -- A integer number that represents the analog signal measured.
+			temp: out data port;
 		flows
-			tempMeasureFlow: flow source temp {Latency => 200ms .. 1000ms;}; -- Latency between temperature measured by the sensor, converted and sent to this output.
-		properties 
-			Dispatch_Protocol => Periodic; -- The periodic behavior is important when to analyze latency, because in sampling communication this period can be account as receiver can lost a sample.
-			Period => 1000ms; -- The period is equal the maximum latency.
+			tempFlow: flow source temp {Latency => 200ms .. 1000ms;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
 	end TempSensor;
-	
-	
-	-- The temperature sensor acquiring will be probably be implemented as a callback created by the user and 
-	-- launched by OS by means of a thread handler.
-	-- As a callback it will invoked on demand of the temperature flag IRQ.
-	thread TemperatureSensorAcquiring
+
+	thread ImageProcessing
 		features
-			temp_in: in data port; -- Temperature sensor read from I2C interface.
-			temp_out: out data port; -- Temperature sensor published in ROS topic.
+			image: in data port;
+			color: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
 		flows
-			temp2dir: flow path temp_in -> temp_out;
+			im2col: flow path image -> color {Latency => 500ms .. 1 sec;};
 		properties
 			Dispatch_Protocol => Periodic;
-			--Period => 200 ms; -- Period is equal to the minimum sample time of the temperature sensor because it will be dispatched by the receive flag.
-			Compute_Execution_Time => 100 us .. 200 us;
-	end TemperatureSensorAcquiring;
+			Period => 1 sec;
+			Compute_Execution_Time => 200ms .. 400ms;
+	end ImageProcessing;
 
-	thread ThermostateAcquiring
+	process ROS
 		features
-			highTempFlag_in: in event port; -- thermostate flag read from IRQ interface.
-			highTempFlag_out: out event port; -- thermostate published in ROS topic.
+			htIn: in event data port;
+			tempIn: in event data port;
+			imgIn: in event data port;
+
+			htOut: out event data port;
+			tempOut: out event data port;
+			colorOut: out event data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; -- Pq é importante ter a latência da porta?
 		flows
-			tempFlag2Agent: flow path highTempFlag_in -> highTempFlag_out;
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 1 ms; -- Although sensor speed is about 100 ns to 1000 ns, this will overload CPU. 1 ms is suficient for response time.
-			Deadline => 1 ms;
-			Compute_Execution_Time => 100 us .. 200 us;
-	end ThermostateAcquiring;
-	
-	thread DroneAgentThread
-		features
-			highTempFlag_in: in event port; -- thermostate flag read from shared memory.
-			temp_in: in data port; -- Temperature sensor read from shared memory.
-			thermalImageColor: in event data port {Queue_Size => 10; Queue_Processing_Protocol => FIFO;}; -- A integer number representing the predominant color in the image, read from ROS topic.
-			ctrlOutput: out data port; -- Drone actuator speeds sent to flight controller via UART interface.
-		flows
-			tempFlag2dir: flow path highTempFlag_in -> ctrlOutput;
-			tempValue2dir: flow path temp_in -> ctrlOutput;
-			ImgColor2dir: flow path thermalImageColor -> ctrlOutput;
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 1 ms; -- Although thermostat sensor speed is about 100 ns to 1000 ns, this will overload CPU. 1 ms is suficient for response time.
-			Compute_Execution_Time => 100 us .. 200 us;
-	end DroneAgentThread;
+			img2colflw: flow path imgIn -> colorOut;
+			hightempflw: flow path htIn -> htOut;
+			tempflw: flow path tempIn -> tempOut;
+	end ROS;
 
-
-
-	process DroneAgent
-		features
-			thermalImageColor: in event data port; -- A integer number representing the predominant color in the image, read from ROS topic.
-			temp_in: in data port; -- Temperature sensor read from I2C interface.
-			highTempFlag_in: in event port; -- thermostate flag read from IRQ interface.
-			ctrlOutput: out data port; -- Drone actuator speeds sent to flight controller via UART interface.
-		flows
-			im2dir: flow path thermalImageColor -> ctrlOutput;
-			thermo2dir: flow path highTempFlag_in -> ctrlOutput;
-			temp2dir: flow path temp_in -> ctrlOutput;
-	end DroneAgent;
-
-
-
-	process implementation DroneAgent.impl
+	process implementation ROS.impl
 		subcomponents
-			TempSensorAcquiringThread: thread TemperatureSensorAcquiring;
-			ThermostateAcquiringThread: thread ThermostateAcquiring;
-			AgentThread: thread DroneAgentThread;
+			imgpr: thread ImageProcessing;
 		connections
-			c1: port temp_in -> TempSensorAcquiringThread.temp_in {Timing => Immediate;};
-			c3: port highTempFlag_in -> ThermostateAcquiringThread.highTempFlag_in {Timing => Immediate;};
-			c5: port TempSensorAcquiringThread.temp_out -> AgentThread.temp_in ; 
-			c6: port ThermostateAcquiringThread.highTempFlag_out -> AgentThread.highTempFlag_in {Timing => Immediate;}; -- The agent thread must awake as soon as possible the heat was detected.
-			c7: port AgentThread.ctrlOutput -> ctrlOutput;
-			c8: port thermalImageColor -> AgentThread.thermalImageColor;
+			c1: port imgIn -> imgpr.image {Latency => 10ms .. 20ms;}; -- A latência na conexão pode ser importante, porém se o tempo de execução da tarefa contabiliza essa latencia, então ela acaba por super estimar a latência fim-a-fim.
+			c2: port imgpr.color -> colorOut {Latency => 1ms .. 2ms;};
 		flows
-			im2dir: flow path thermalImageColor -> c8 -> AgentThread.ImgColor2dir -> c7 -> ctrlOutput;
-			thermo2dir: flow path highTempFlag_in -> c3 -> ThermostateAcquiringThread.tempFlag2Agent -> c6 -> AgentThread.tempFlag2dir -> c7 -> ctrlOutput;
-			temp2dir: flow path temp_in -> c1 -> TempSensorAcquiringThread.temp2dir -> c5 -> AgentThread.tempValue2dir -> c7 -> ctrlOutput;
-	end DroneAgent.impl;
+			img2colflw: flow path imgIn -> c1 -> imgpr.im2col -> c2 -> colorOut;
+	end ROS.impl;
+
+	thread ControlSW
+		features
+			color: in data port;
+			temp: in data port;
+			high_temp: in data port;
+			dir: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
+		flows
+			col2dirflw: flow path color -> dir {Latency => 5ms .. 10ms;};
+			temp2dirflw: flow path temp -> dir {Latency => 5ms .. 10ms;};
+			hight2dirflw: flow path high_temp -> dir {Latency => 5ms .. 10ms;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 10ms;
+			Compute_Execution_Time => 2ms .. 4ms;
+	end ControlSW;
 
 	system Drone
 	end Drone;
@@ -183,36 +95,95 @@ public
 	system implementation Drone.impl
 		subcomponents
 			--Processors
-			jetson: processor DroneCompanionComputer;
+			jetson: processor JetsonTX2;
 			
+			--Busses
+			ethernet: bus Buses::Ethernet::Ethernet.impl;
+
 			--Processes:
-			agent: process DroneAgent.impl;
-			thermal_image_process: process ThermalImageProcessingProc.impl;
+			droneProcess: process DroneProcess.impl;
+			ros: process ROS.impl;
 
 			--Devices
 			cam: device ThermalCamera;
 			therm: device Thermostat;
 			tsensor: device TempSensor;
-			fsys: device FlightController;
-			
-			--Communication systems
-			ROS: virtual bus ROS2.impl;
+			fsys: device Flight_System;
 			
 		connections
-			c1: port therm.highTempFlag -> agent.highTempFlag_in {Timing => Immediate;}; -- Connection is immediate because a IRQ flag wakes the receiver.
-			c2: port tsensor.temp -> agent.temp_in {Timing => Immediate;}; -- Connection is immediate because a IRQ flag wakes the receiver.
-			c3: port cam.image -> thermal_image_process.image; -- Image pass through ROS communication mechanism.
-			--Latency is necessary if we doesnt cosinder the latency in process execution time of the processes involved in communication.
-			--c3: port cam.image -> thermal_image_process.image {Latency => 10ms .. 20ms;};
-			c4: port thermal_image_process.color -> agent.thermalImageColor; -- Image color through ROS communication mechanism.
-			c5: port agent.ctrlOutput -> fsys.nextDirection {Timing => Immediate;};
+			c1: port therm.highTemp -> ros.htIn;
+			c2: port tsensor.temp -> ros.tempIn; 
+			c3: port cam.image -> ros.imgIn {Latency => 10ms .. 20ms;};
+			c4: port ros.htOut -> droneProcess.high_temp;
+			c5: port ros.colorOut -> droneProcess.color {Latency => 1ms .. 2ms;};
+			c6: port ros.tempOut -> droneProcess.temp {Latency => 1ms .. 2ms;};
+			c8: port droneProcess.dir -> fsys.nextDirection {Latency => 1ms .. 2ms;};
 		flows
-			img2dir_flw: end to end flow  cam.imageGenerationFlow -> c3 -> thermal_image_process.im2col -> c4 -> agent.im2dir -> c5 -> fsys.ndf { Latency => 0ms .. 500ms; }; -- Expected end-to-end latency
-			temp2dir_flw: end to end flow tsensor.tempMeasureFlow -> c2 -> agent.temp2dir -> c5 -> fsys.ndf { Latency => 0ms .. 500ms; }; -- Expected end-to-end latency
-			highTemp2dir_flw: end to end flow therm.highTempMeasureFlow -> c1 -> agent.thermo2dir -> c5 -> fsys.ndf { Latency => 0ms .. 500ms; }; -- Expected end-to-end latency
+			img2dir_flw: end to end flow  cam.imageFlow -> c3 -> ros.img2colflw -> c5 -> droneProcess.col2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
+			temp2dir_flw: end to end flow tsensor.tempFlow -> c2 -> ros.tempflw -> c6 -> droneProcess.temp2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
+			highTemp2dir_flw: end to end flow therm.highTempFlow -> c1 -> ros.hightempflw -> c4 -> droneProcess.therm2dirflw -> c8 -> fsys.ndf { Latency => 10ms .. 500ms; }; -- Expected end-to-end latency
 		properties
-			Actual_Processor_Binding => (reference (jetson)) applies to agent;
-			Actual_Processor_Binding => (reference (jetson)) applies to thermal_image_process;
-			Actual_Connection_Binding => (reference (ROS)) applies to c3;
+			Actual_Processor_Binding => (reference (jetson)) applies to droneProcess;
+			Actual_Processor_Binding => (reference (jetson)) applies to ros;
 	end Drone.impl;
+
+	process DroneProcess
+		features
+			high_temp: in data port;
+			color: in data port;
+			temp: in data port;
+			dir: out data port {Output_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);};
+		flows
+			col2dirflw: flow path color -> dir;
+			temp2dirflw: flow path temp -> dir;
+			therm2dirflw: flow path high_temp -> dir;
+	end DroneProcess;
+
+	process implementation DroneProcess.impl
+		subcomponents
+			sw: thread ControlSW;
+		connections
+			dpic1: feature high_temp -> sw.high_temp;
+			dpic2: feature color -> sw.color {Latency => 1ms .. 2ms;};
+			dpic3: feature temp -> sw.temp;
+			dpic4: feature sw.dir -> dir {Latency => 1ms .. 2ms;};
+		flows
+			col2dirflw: flow path color -> dpic2 -> sw.col2dirflw -> dpic4 -> dir;
+			temp2dirflw: flow path temp -> dpic3 -> sw.temp2dirflw -> dpic4 -> dir;
+			therm2dirflw: flow path high_temp -> dpic1 -> sw.hight2dirflw -> dpic4 -> dir;
+			
+	end DroneProcess.impl;
+
+--	processor Nucleof767zi extends Processors::ARM::Generic_ARM
+--		features
+--			eth_bus: requires bus access Buses::Ethernet::Ethernet.IMPL;
+--			pwm_bus: requires bus access Buses::PWM::PWM.impl;
+--		properties
+--			Processor_Properties::Processor_Frequency => 168 Mhz;
+--			Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
+--	end Nucleof767zi;
+
+	processor JetsonTX2 extends Processors::ARM::Generic_ARM
+		features
+			eth_bus: requires bus access Buses::Ethernet::Ethernet.IMPL;
+		properties
+			Processor_Properties::Processor_Frequency => 168 Mhz;
+			Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
+	end JetsonTX2;
+
+	device Flight_System
+		features
+			nextDirection: in data port {Input_Time => ([Time => Deadline; Offset => 0ms .. 0ms;]);}; --2do: check the timing info 
+		flows
+			ndf: flow sink nextDirection {Latency => 15ms .. 50ms;}; --2do: revise timing values
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 100ms;
+	end Flight_System;
+
+--	device implementation Flight_System.impl
+--		flows
+--			ndf: flow sink nextDirection 
+--	end Flight_System.impl;
+
 end drone;

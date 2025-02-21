@@ -1,0 +1,171 @@
+package drone
+public
+
+	device Battery
+		features
+			chargeLevel: out data port;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1 sec;
+	end Battery;
+
+	device Camera
+		features
+			image: out data port;
+		flows
+			imageFlow: flow source image;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1 sec;
+	end Camera;
+
+	device Temperature
+		features
+			temp: out data port;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1 sec;
+	end Temperature;
+
+	process FlightController
+		features
+			nextDirection: in data port;
+		flows
+			usedir: flow sink nextDirection;
+	end FlightController;
+
+	process implementation FlightController.impl
+		subcomponents
+			fc: thread FlightController_th;
+		connections
+			c1: port nextDirection -> fc.nextDirection;
+		flows
+			usedir: flow sink nextDirection -> c1 -> fc.usedir;
+	end FlightController.impl;
+
+	thread FlightController_th
+		features
+			nextDirection: in data port;
+		flows
+			usedir: flow sink nextDirection;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+	end FlightController_th;
+
+	thread ImageProcessing
+		features
+			image: in data port;
+			color: out data port;
+		flows
+			im2col: flow path image -> color;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 2 sec;
+	end ImageProcessing;
+
+	process ROS
+		features
+			batIn: in event data port;
+
+			tempIn: in event data port;
+			ImgIn: in event data port;
+
+			batOut: out event data port;
+
+			tempOut: out event data port;
+			colorOut: out event data port;
+			dirIn: in event data port;
+			dirOut: out event data port;
+		flows
+			img2col: flow path ImgIn -> colorOut;
+			dirInOut: flow path dirIn -> dirOut;
+	end ROS;
+
+	process implementation ROS.impl
+		subcomponents
+			imgpr: thread ImageProcessing;
+			pubDir: thread Publish;
+		connections
+			c1: port ImgIn -> imgpr.image;
+			c2: port imgpr.color -> colorOut;
+			c3: port dirIn -> pubDir.i;
+			c4: port pubDir.o -> dirOut;
+		flows
+			img2col: flow path imgIn -> c1 -> imgpr.im2col -> c2 -> colorOut;
+			dirInOut: flow path dirIn -> c3 -> pubDir.i2o -> c4 -> dirOut;
+	end ROS.impl;
+
+	thread Publish
+		features
+			o: out data port;
+			i: in event data port {Queue_Size => 10; Queue_Processing_Protocol => FIFO;};
+		flows
+			i2o: flow path i -> o;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 5ms;
+	end Publish;
+
+	thread ControlSW
+		features
+			color: in data port;
+			dir: out data port;
+			temp: in data port;
+			bat: in data port;
+		flows
+			col2dir: flow path color -> dir;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 10ms;
+	end ControlSW;
+
+	system Drone
+	end Drone;
+
+	system implementation Drone.impl
+		subcomponents
+			droneProcess: process DroneProcess.impl;
+			ros: process ROS;
+			cam: device Camera;
+			bat: device Battery;
+			temp: device Temperature;
+
+			fltct: process FlightController;
+		connections
+			c2: port temp.temp -> ros.tempIn;
+			c3: port cam.image -> ros.ImgIn;
+			c0: port bat.chargeLevel -> ros.batIn;
+			c4: port ros.batOut -> droneProcess.bat;
+			c5: port ros.colorOut -> droneProcess.color;
+			c6: port ros.tempOut -> droneProcess.temp;
+			c7: port droneProcess.dir -> ros.dirIn;
+			c8: port ros.dirOut -> fltct.nextDirection;
+		flows
+			img2dir: end to end flow  cam.imageFlow -> c3 -> ros.img2col -> c5 -> droneProcess.col2dir -> c7 -> ros.dirInOut -> c8 -> fltct.usedir;
+		properties
+			Latency => 2 sec .. 3 sec applies to img2dir;
+	end Drone.impl;
+
+	process DroneProcess
+		features
+			bat: in data port;
+			color: in data port;
+			temp: in data port;
+			dir: out data port;
+		flows
+			col2dir: flow path color -> dir;
+	end DroneProcess;
+
+	process implementation DroneProcess.impl
+		subcomponents
+			sw: thread ControlSW;
+		connections
+			DroneProcess_impl_new_connection: feature bat -> sw.bat;
+			DroneProcess_impl_new_connection2: feature color -> sw.color;
+			DroneProcess_impl_new_connection3: feature temp -> sw.temp;
+			DroneProcess_impl_new_connection4: feature sw.dir -> dir;
+		flows
+			col2dir: flow path color -> DroneProcess_impl_new_connection2 -> sw.col2dir -> DroneProcess_impl_new_connection4 -> dir;
+	end DroneProcess.impl;
+end drone;

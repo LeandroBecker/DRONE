@@ -1,0 +1,26 @@
+--  This package models a generic AFDX device, to be later refined 
+
+package Devices::SPI_TO_UART
+public
+	with Buses::UART;
+
+	with Buses::SPI;
+
+	------------------------------------
+	-- Generic_Converter SBUS to UART --
+	------------------------------------
+	device SPI_TO_UART
+		features
+			--spi_in: in event port;
+			--uart_out: out event port;
+			--spi_data: in data port;
+			--uart_data: out data port;
+			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+			usart_bus: requires bus access Buses::UART::UART.IMPL;
+	end SPI_TO_UART;
+
+	device implementation SPI_TO_UART.impl
+	end SPI_TO_UART.impl;
+
+end Devices::SPI_TO_UART;
+
