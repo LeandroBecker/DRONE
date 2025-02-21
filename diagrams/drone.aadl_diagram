@@ -44,7 +44,7 @@
           <seg>c3</seg>
         </bo>
         <bendpoints>
-          <point x="80.0" y="190.0"/>
+          <point x="81.0" y="191.0"/>
           <point x="81.0" y="351.0"/>
         </bendpoints>
       </element>
@@ -85,8 +85,8 @@
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="188.75650024414062" y="275.5"/>
-          <point x="200.75650024414062" y="275.5"/>
+          <point x="189.0" y="276.0"/>
+          <point x="201.0" y="276.0"/>
         </bendpoints>
       </element>
       <element uuid="20ac9243-52ee-4449-a316-cee90519cac4" manual="true">
@@ -277,7 +277,7 @@
               <seg>feature</seg>
               <seg>temp_in</seg>
             </bo>
-            <position x="30.000000000000114" y="76.0"/>
+            <position x="30.0" y="76.0"/>
           </element>
           <element uuid="ea04266a-c829-4ea6-aaf2-2b1fbf0f510f" manual="true" dockArea="right">
             <bo>
@@ -311,14 +311,14 @@
               <seg>feature</seg>
               <seg>highTempFlag_in</seg>
             </bo>
-            <position x="30.000000000000114" y="76.0"/>
+            <position x="30.0" y="76.0"/>
           </element>
           <element uuid="1b3cb7ce-c5a6-4f9b-babf-9585144532c6" manual="true" dockArea="left">
             <bo>
               <seg>feature</seg>
               <seg>highTempFlag_out</seg>
             </bo>
-            <position y="30.000000000000057"/>
+            <position y="30.0"/>
           </element>
           <element uuid="d6f35805-eec1-48ac-9fcb-028c5867f11f" manual="true">
             <bo>
@@ -337,7 +337,7 @@
             <seg>ThermostateAcquiringThread</seg>
           </bo>
           <position x="60.0" y="260.0"/>
-          <size width="228.1992416381836" height="100.0"/>
+          <size width="228.0" height="100.0"/>
         </element>
         <element uuid="a6a3ee24-3340-4d96-886e-98b7db61595e" manual="true">
           <bo>
@@ -349,7 +349,7 @@
           <seg>subcomponent</seg>
           <seg>agent</seg>
         </bo>
-        <position x="460.0" y="70.0"/>
+        <position x="410.0" y="70.0"/>
         <size width="590.0" height="400.0"/>
       </element>
       <element uuid="a549dd3c-dbb8-476f-ac69-f625d8135acf" manual="true">
@@ -377,8 +377,8 @@
           <seg>subcomponent</seg>
           <seg>cam</seg>
         </bo>
-        <position x="130.00000000000003" y="50.0"/>
-        <size width="159.99999999999994" height="100.0"/>
+        <position x="80.0" y="50.0"/>
+        <size width="160.0" height="100.0"/>
       </element>
       <element uuid="9e05da07-e345-475c-991a-c18a2233de59" manual="true">
         <element uuid="b63fd69e-2109-4172-88f2-28af38957835" manual="true" dockArea="right">
@@ -393,7 +393,7 @@
             <seg>flow_specification</seg>
             <seg>ndf</seg>
           </bo>
-          <position x="55.4375" y="78.5"/>
+          <position x="55.0" y="79.0"/>
         </element>
         <element uuid="997ae59b-567a-4a67-8987-5be2c48ed865" manual="true">
           <bo>
@@ -405,7 +405,7 @@
           <seg>subcomponent</seg>
           <seg>fsys</seg>
         </bo>
-        <position x="950.0000000000001" y="480.0"/>
+        <position x="900.0" y="480.0"/>
         <size width="140.0" height="110.0"/>
       </element>
       <element uuid="6270e016-b379-4926-bfed-06dd6099b55a" manual="true">
@@ -413,8 +413,8 @@
           <seg>subcomponent</seg>
           <seg>ROS</seg>
         </bo>
-        <position x="320.0" y="10.0"/>
-        <size width="86.08203125" height="35.0"/>
+        <position x="270.0" y="10.0"/>
+        <size width="86.0" height="35.0"/>
       </element>
       <element uuid="b22794ed-0ace-40dc-af75-0353db74caa2" manual="true">
         <element uuid="1e853e7f-dba5-4321-97b9-4cf5a6f3ad6b" manual="true" dockArea="right">
@@ -441,7 +441,7 @@
           <seg>subcomponent</seg>
           <seg>therm</seg>
         </bo>
-        <position x="270.0" y="470.0"/>
+        <position x="220.0" y="470.0"/>
         <size width="130.0" height="107.0"/>
       </element>
       <element uuid="6b119069-0f34-471b-aef3-2220a37f78ff" manual="true">
@@ -474,14 +474,14 @@
             <seg>feature</seg>
             <seg>color</seg>
           </bo>
-          <position x="279.1002597808838" y="90.00000000000003"/>
+          <position x="279.1002597808838" y="90.0"/>
         </element>
         <element uuid="38f1e0a9-0615-4a7d-b4a9-6c0f19818145" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>image</seg>
           </bo>
-          <position y="90.00000000000006"/>
+          <position y="90.0"/>
         </element>
         <element uuid="57224066-1e76-434f-be76-b07f5c634072" manual="true" primaryLabelVisible="false">
           <element uuid="518b2d5b-df5c-4e89-88e8-f4acdb65dba0" manual="true" dockArea="right">
@@ -489,14 +489,14 @@
               <seg>feature</seg>
               <seg>color</seg>
             </bo>
-            <position x="160.44918251037586" y="30.000000000000057"/>
+            <position x="160.1002597808838" y="30.0"/>
           </element>
           <element uuid="85c72578-589b-4806-88b9-1e87c1b376e6" manual="true" dockArea="left">
             <bo>
               <seg>feature</seg>
               <seg>image</seg>
             </bo>
-            <position y="30.000000000000057"/>
+            <position y="30.0"/>
           </element>
           <element uuid="24df3cac-d712-4654-b10f-91ec2ffce485" manual="true">
             <bo>
@@ -514,8 +514,8 @@
             <seg>subcomponent</seg>
             <seg>ThermalImageProcessingThread</seg>
           </bo>
-          <position x="60.00000000000003" y="60.00000000000003"/>
-          <size width="201.34892272949207" height="95.99999999999994"/>
+          <position x="60.0" y="60.0"/>
+          <size width="201.0" height="96.0"/>
         </element>
         <element uuid="b76fd494-27e6-48a9-8a19-90fd48973612" manual="true">
           <bo>
@@ -527,8 +527,8 @@
           <seg>subcomponent</seg>
           <seg>thermal_image_process</seg>
         </bo>
-        <position x="90.00000000000003" y="170.0"/>
-        <size width="320.0" height="209.99999999999997"/>
+        <position x="40.0" y="170.0"/>
+        <size width="320.0" height="210.0"/>
       </element>
       <element uuid="073a85df-68e3-48f1-9b96-664d9af4d8d6" manual="true">
         <element uuid="6da0b484-5865-472a-98fd-36150f84deb7" manual="true" dockArea="left">
@@ -543,7 +543,7 @@
             <seg>flow_specification</seg>
             <seg>tempMeasureFlow</seg>
           </bo>
-          <position x="80.64192581176758" y="82.0"/>
+          <position x="81.0" y="82.0"/>
         </element>
         <element uuid="7d6a0155-4176-4652-89bb-177ea7234056" manual="true">
           <bo>
@@ -555,22 +555,22 @@
           <seg>subcomponent</seg>
           <seg>tsensor</seg>
         </bo>
-        <position x="790.0" y="480.0"/>
-        <size width="130.91275787353516" height="110.0"/>
+        <position x="740.0" y="480.0"/>
+        <size width="131.0" height="110.0"/>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>Drone.impl</seg>
       </bo>
-      <position x="20.0" y="60.0"/>
-      <size width="1160.0" height="630.0"/>
+      <position x="20.0" y="40.0"/>
+      <size width="1110.0" height="630.0"/>
     </element>
     <bo>
       <seg>package</seg>
       <seg>drone</seg>
     </bo>
-    <position/>
-    <size width="1190.0" height="710.0"/>
+    <position x="50.0" y="20.0"/>
+    <size width="1140.0" height="690.0"/>
   </element>
   <config type="package" connectionPrimaryLabelsVisible="false">
     <enabledAadlProperties/>
