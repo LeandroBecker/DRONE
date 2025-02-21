@@ -1,0 +1,74 @@
+package CAMERAS
+public
+	with Buses::Misc;
+
+	with Electricity_Properties;
+
+	with Buses::Ethernet;
+
+	with Data_Model;
+
+	with Buses::Misc;
+
+	with Buses::USB;
+
+	with Electricity_Properties;
+
+	with Data_Model;
+	
+		-----------------------
+		-- Hss --
+		-----------------------
+
+	device camera_nc353l
+		features
+			PortCom: requires bus access Buses::Ethernet::Ethernet.impl;
+			Supply: requires bus access buses::misc::V12_Bus.impl; -- power connection not defined completly , may use switcher between Bat & camera in  the future
+			picture: out data port picture5MB;
+			proc_evt: in event port;
+	end camera_nc353l;
+
+	device implementation camera_nc353l.impl
+		properties
+				-- Device_Funcionality => CameraIP;
+			Electricity_Properties::Core_Voltage => 3.3V; -- range is 3.3 V .. 48.0 V; -- 4-pin header provides unregulated 48VDC from PoE input circuitry and 3.3V system power
+			Electricity_Properties::Device_Type => Slave;
+			data_size => 5 MByte;
+	end camera_nc353l.impl;
+
+	
+	data picture5MB
+		properties
+			data_size => 5 MByte;
+			data_model::data_representation => array;
+	end picture5MB;
+
+data picture1MB
+		properties
+			data_size => 1 MByte;
+			data_model::data_representation => array;
+	end picture1MB;
+	
+		-----------------------
+		-- Hs --
+		-----------------------
+		
+	device CAMERA_USB
+		features
+			Serial_Wire: requires bus access buses::USB::USB.impl;
+			Supply: requires bus access buses::misc::V5_Bus.impl;
+			picture: out data port picture1MB;
+			proc_evt: out event port;
+	end CAMERA_USB;
+
+	device implementation CAMERA_USB.impl
+		properties
+				-- Device_Funcionality => Camera_USB1.0;
+			Period => 1000ms;
+
+			Electricity_Properties::Core_Voltage => 5.0V; -- 4.75 .. 5.25 V  standard USB range
+			Electricity_Properties::Acquisition_Time => 1 sec; -- no data
+
+	end CAMERA_USB.impl;
+
+end CAMERAS;

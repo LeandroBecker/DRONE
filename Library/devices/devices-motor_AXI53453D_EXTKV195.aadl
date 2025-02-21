@@ -1,0 +1,33 @@
+package devices::MOTOR::AXI53453D_EXTKV195
+public
+	--with buses::misc;
+	with Electricity_Properties;
+	with Device_Property;
+
+-----------------
+--   DEVICE   --
+-----------------
+	device AXI53453D_EXTKV195
+		features
+			phase_in: in data port;
+		flows
+			f1: flow sink phase_in {latency => 100us .. 100us;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 50ms;
+			Device_Property::Power_Consume => 4192.00W;
+			Device_property::Max_Efficiency => 95.0 percent;
+			Device_property::Max_No_Cells => 10.0 cells;
+			Device_property::Mass => 995.0g;
+			Device_property::Device_Functionality => (BrushlessMotor);
+			Electricity_Properties::Peak_Current => 75.0 A;
+			Device_Property::RPM_per_Volt => 1100 RpmV;
+			Device_property::LIFT3D => 7000.0g;
+			SEI::price => 337.00 USD;
+	end AXI53453D_EXTKV195;
+
+	device implementation AXI53453D_EXTKV195.impl
+	end AXI53453D_EXTKV195.impl;
+
+
+end devices::MOTOR::AXI53453D_EXTKV195;

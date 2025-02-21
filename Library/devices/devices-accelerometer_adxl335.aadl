@@ -1,0 +1,32 @@
+-- This package defines some Accelerometer from the ADXL family
+
+package Devices::ADXL335
+public
+	with Unit;
+
+	with Electricity_Properties;
+
+	device ADXL335
+		features
+			X: out data port Unit::Acceleration;
+			Y: out data port Unit::Acceleration;
+			Z: out data port Unit::Acceleration;
+	end ADXL335;
+
+	device implementation ADXL335.impl
+		Properties
+				-- Device_Functionality => Accelerometer;
+			Electricity_Properties::VIL_max => 0.6v;
+			Electricity_Properties::VIH_min => 2.4v;
+			Electricity_Properties::VOL_max => 0.1v;
+			Electricity_Properties::VOH_min => 2.8v;
+			Electricity_Properties::Core_Voltage => 3.0V;
+			Electricity_Properties::Acquisition_Time => 1ms;
+			Electricity_Properties::Run_Current => 350.0uA;
+			--Rate_Data_X => 0.5 .. 1600 Hz;
+			--Rate_Data_Y => 0.5 .. 550 Hz;
+			--Rate_Data_Z => 0.5 .. 550 Hz;
+			Period => 2ms;
+	end ADXL335.impl;
+
+end Devices::ADXL335;
